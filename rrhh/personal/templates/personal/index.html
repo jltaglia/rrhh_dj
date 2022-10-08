@@ -1,0 +1,90 @@
+{% extends 'personal/base.html' %}
+{% load static %}
+{% block content %}
+    <style>
+        #btn-back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            z-index: 50000;
+        }
+    </style>
+    <button type="button" class="btn btn-danger btn-floating btn-lg" id="btn-back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <div>
+        <table class="table table-dark table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th>Leg</th>
+                    <th>Foto</th>
+                    <th>Apellidos</th>
+                    <th>Nombres</th>
+                    <th>Acciones</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if empleados%}
+                    {% for empleado in empleados %}
+                        <tr>
+                            <td>{{empleado.id}}</td>
+                            <td><img src="{% static 'personal/img/{{empleado.foto}}' %}" alt="" class="img-thum" width = "80" height="95" ></td>
+                            <td>{{empleado.apellidos}}</td>
+                            <td>{{empleado.nombres}}</td>
+                            <td>
+                                <a class="btn btn-outline-info" href="/show/{{empleado.id}}">Ver</a>
+                                <a class="btn btn-outline-primary" href="/edit/{{empleado.id}}">Editar</a>
+                                <a class="btn btn-outline-success" href="/licencia/{{empleado.id}}">Licencias</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-outline-danger" href="/borrar/{{empleado.id}}">Borrar</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                        <tr>
+                            <td>No hay empleados para mostrar</td>
+                            <td>---</td>
+                            <td>---</td>
+                            <td>---</td>
+                            <td>---</td>
+                            <td></td>
+                        <tr>
+                {% endif %}
+            </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+    </div>
+
+    <script>
+        //Get the button
+        let mybutton = document.getElementById("btn-back-to-top");
+
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () {
+        scrollFunction();
+        };
+
+        function scrollFunction() {
+        if (
+        document.body.scrollTop > 20 ||
+        document.documentElement.scrollTop > 20
+        ) {
+        mybutton.style.display = "block";
+        } else {
+        mybutton.style.display = "none";
+        }
+        }
+        // When the user clicks on the button, scroll to the top of the document
+        mybutton.addEventListener("click", backToTop);
+
+        function backToTop() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+        }
+    </script>
+{% endblock content %}
