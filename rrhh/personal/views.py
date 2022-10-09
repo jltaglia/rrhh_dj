@@ -8,9 +8,7 @@ from .models import Personal
 def index(request):
     # return HttpResponse('Index de Personal')
     empleados = Personal.objects.order_by('apellidos', 'nombres')
-    
     context = {'empleados': empleados}
-    
     return render(request, 'personal/index.html', context)
 
 

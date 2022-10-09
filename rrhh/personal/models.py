@@ -53,7 +53,7 @@ class Parentescos (models.Model):
 
 
 class Personal (models.Model):
-    foto             = models.FilePathField(path='/static/personal/img', max_length=50)
+    foto             = models.ImageField(default='default.jpg', upload_to='fotos_pers')
     legajo           = models.SmallIntegerField()
     apellidos        = models.CharField(max_length=30)
     nombres          = models.CharField(max_length=40)

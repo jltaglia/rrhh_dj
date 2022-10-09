@@ -31,13 +31,13 @@
                     {% for empleado in empleados %}
                         <tr>
                             <td>{{empleado.id}}</td>
-                            <td><img src="{% static 'personal/img/{{empleado.foto}}' %}" alt="" class="img-thum" width = "80" height="95" ></td>
+                            <td><img class="rounded-circle" src="{{empleado.foto.url}}" alt="" class="img-thum" width = "80" height="95" ></td>
                             <td>{{empleado.apellidos}}</td>
                             <td>{{empleado.nombres}}</td>
                             <td>
                                 <a class="btn btn-outline-info" href="/show/{{empleado.id}}">Ver</a>
                                 <a class="btn btn-outline-primary" href="/edit/{{empleado.id}}">Editar</a>
-                                <a class="btn btn-outline-success" href="/licencia/{{empleado.id}}">Licencias</a>
+                                {% comment %} <a class="btn btn-outline-success" href="/licencia/{{empleado.id}}">Licencias</a> {% endcomment %}
                             </td>
                             <td>
                                 <a class="btn btn-outline-danger" href="/borrar/{{empleado.id}}">Borrar</a>
