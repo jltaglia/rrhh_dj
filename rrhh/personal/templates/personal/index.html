@@ -35,12 +35,12 @@
                             <td>{{empleado.apellidos}}</td>
                             <td>{{empleado.nombres}}</td>
                             <td>
-                                <a class="btn btn-outline-info" href="/show/{{empleado.id}}">Ver</a>
-                                <a class="btn btn-outline-primary" href="/edit/{{empleado.id}}">Editar</a>
+                                <a class="btn btn-outline-info" href="/personal/personal_detail/{{empleado.id}}">Ver</a>
+                                <a class="btn btn-outline-primary" href="/personal/edit/{{empleado.id}}">Editar</a>
                                 {% comment %} <a class="btn btn-outline-success" href="/licencia/{{empleado.id}}">Licencias</a> {% endcomment %}
                             </td>
                             <td>
-                                <a class="btn btn-outline-danger" href="/borrar/{{empleado.id}}">Borrar</a>
+                                <a class="btn btn-outline-danger" href="/personal/borrar/{{empleado.id}}">Borrar</a>
                             </td>
                         </tr>
                     {% endfor %}
@@ -59,32 +59,4 @@
             </tfoot>
         </table>
     </div>
-
-    <script>
-        //Get the button
-        let mybutton = document.getElementById("btn-back-to-top");
-
-        // When the user scrolls down 20px from the top of the document, show the button
-        window.onscroll = function () {
-        scrollFunction();
-        };
-
-        function scrollFunction() {
-        if (
-        document.body.scrollTop > 20 ||
-        document.documentElement.scrollTop > 20
-        ) {
-        mybutton.style.display = "block";
-        } else {
-        mybutton.style.display = "none";
-        }
-        }
-        // When the user clicks on the button, scroll to the top of the document
-        mybutton.addEventListener("click", backToTop);
-
-        function backToTop() {
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
-        }
-    </script>
 {% endblock content %}
