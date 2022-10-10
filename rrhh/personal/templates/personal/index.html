@@ -1,5 +1,8 @@
 {% extends 'personal/base.html' %}
 {% load static %}
+{% block title %}
+    - Padrón
+{% endblock title %}
 {% block content %}
     <style>
         #btn-back-to-top {
@@ -35,7 +38,7 @@
                             <td>{{empleado.apellidos}}</td>
                             <td>{{empleado.nombres}}</td>
                             <td>
-                                <a class="btn btn-outline-info" href="/personal/personal_detail/{{empleado.id}}">Ver</a>
+                                <a class="btn btn-outline-info" href="/personal/personal_detail/{{empleado.id}}">Detalle</a>
                                 <a class="btn btn-outline-primary" href="/personal/edit/{{empleado.id}}">Editar</a>
                                 {% comment %} <a class="btn btn-outline-success" href="/licencia/{{empleado.id}}">Licencias</a> {% endcomment %}
                             </td>

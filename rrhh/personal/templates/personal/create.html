@@ -1,5 +1,7 @@
 {% extends 'personal/base.html' %}
-{% load crispy_forms_tags %}
+{% block title %}
+    - Nuevo Empleado
+{% endblock title %}
 {% block content %}
     <form method="POST" action="/create/" enctype="multipart/form-data">
         {% csrf_token %}
