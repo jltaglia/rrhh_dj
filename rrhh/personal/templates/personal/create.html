@@ -4,13 +4,147 @@
     <form method="POST" action="/create/" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-group">
-            <br>
-            {{ form|crispy }}
+            <div class="card">
+                <div class="card-header">
+                    Alta de Nuevo Empleado
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="card-title">Datos del Empleado</h5>
+                            </div>
+                            <div class="col">
+                                <input name="txtIdEmpleado" class="form-control form-control-lg" type="text" aria-label="Disabled input example" disabled readonly value="NUEVO"></input>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="card-text">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <label for="txtApellidos">Apellidos</label>
+                                    <input id="apellidos" type="text" class="form-control" placeholder="Apellidos completos" aria-label="First name" name="apellidos">
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="txtNombres">Nombres</label>
+                                    <input id="nombres" type="text" class="form-control" placeholder="Nombres completos" aria-label="Last name" name="nombres">
+                                </div>
+                                <div class="col-sm-3">
+                                    <input id="foto" class="form-control" type="file" accept="image/*" name="foto" oninput="myFunction()"></input>
+                                </div>
+                                <div class="col-sm">
+                                    <img id="img_thumb_personal" class="img-thumbnail" width="100" src="#" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- PARA HACER PREVIEW DE LA FOTO UNA VEZ SELECCIONADA -->
+                        <script>
+                            foto.onchange = evt => {
+                                const [file] = foto.files
+                                    if (file) {
+                                        img_thumb_personal.src = URL.createObjectURL(file)
+                                    }
+                            }
+                        </script>
+                        <!--  -->
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="id_documento" class="form-label">Tipo de Documento</label>
+                                    <select class="form-select form-select-sm" id="id_documento" name="id_documento">
+                                        {% comment %} {% for doc in id_documento %}
+                                            <option value="{{documento[0]}}">{{documento[1]}}</option>
+                                        {% endfor %} {% endcomment %}
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label for="txtDoc">Nº Documento</label>
+                                    <input id="documento" class="form-control" type="text" name="documento"></input>
+                                </div>
+                                <div class="col">
+                                    <label for="txtCuil">CUIL</label>
+                                    <input id="cuil" class="form-control" type="text" name="cuil"></input>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="dateNacim">Fecha de Nacimiento</label>
+                                    <input id="fecha_nacimiemto" class="form-control" type="date" name="fecha_nacimiemto"></input>
+                                </div>
+                                <div class="col">
+                                    <label for="id_est_civil" class="form-label">Estado Civil</label>
+                                    <select class="form-select form-select-sm" id="id_est_civil" name="id_est_civil">
+                                        {% comment %} {% for estado in est_civiles %}
+                                            <option value="{{estado[0]}}">{{estado[1]}}</option>
+                                        {% endfor %} {% endcomment %}
+                                    </select>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="dateIngreso">Fecha de Ingreso</label>
+                                    <input id="fecha_ingreso" class="form-control" type="date" name="fecha_ingreso"></input>
+                                </div>
+                                <div class="col">
+                                    <label for="id_categoria" class="form-label">Categoria</label>
+                                    <select class="form-select form-select-sm" id="id_categoria" name="id_categoria">
+                                        {% comment %} {% for categoria in categorias %}
+                                            <option value="{{categoria[0]}}">{{categoria[1]}}</option>
+                                        {% endfor %} {% endcomment %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="domicilio">Domicilio</label>
+                                    <input id="domicilio" class="form-control" type="text" name="domicilio"></input>
+                                </div>
+                                <div class="col">
+                                    <label for="id_localidad" class="form-label">Localidad</label>
+                                    <select class="form-select form-select-sm" id="id_localidad" name="id_localidad">
+                                        {% comment %} {% for lyp in locs_y_provs %}
+                                            <option value="{{lyp[0]}}">{{lyp[1]}}</option>
+                                        {% endfor %} {% endcomment %}
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label for="id_provincia" class="form-label">Provincia</label>
+                                    <select class="form-select form-select-sm" id="id_provincia" name="id_provincia">
+                                        {% comment %} {% for lyp in locs_y_provs %}
+                                            <option value="{{lyp[0]}}">{{lyp[1]}}</option>
+                                        {% endfor %} {% endcomment %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="tel">Teléfono</label>
+                                    <input id="tel" class="form-control" type="text" name="tel"></input>
+                                </div>
+                                <div class="col">
+                                    <label for="email">Email</label>
+                                    <input id="email" class="form-control" type="email" name="email"></input>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-outline-success" value="Confirma"></input>
+                            <a class="btn btn-outline-primary" href="{% url 'index' %}">Cancelar</a>
+                        </div>
+                    </p>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <input type="submit" class="btn btn-outline-success" value="Confirma"></input>
-            <a class="btn btn-outline-primary" href="{% url 'index' %}">Cancelar</a>
-        </div>
-    
     </form>
 {% endblock content %}
