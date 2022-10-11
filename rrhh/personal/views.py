@@ -26,9 +26,8 @@ def filter(request):
     
 def create(request):
     if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
+        # SI EL REQUEST ES UN POST:
         form = Nuevo_empleado(request.POST)
-        # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required
             # ...
@@ -37,7 +36,7 @@ def create(request):
             messages.success(request, f'Empleado dado de alta!') # flash message
             return redirect('index')
 
-    # if a GET (or any other method) we'll create a blank form
+    # SI EL REQUEST ES UN GET:
     else:
         form = Nuevo_empleado()
 
@@ -47,4 +46,7 @@ def create(request):
 class Detalle_Empleado(DetailView):
     model = Personal      
 
+class Baja_Empleado(DeleteView):
+    model = Personal
+    success_url = '/'
     

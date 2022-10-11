@@ -1,0 +1,34 @@
+{% extends 'personal/base.html' %}
+{% block title %}
+    - Baja
+{% endblock title %}
+{% block content %}
+    {% csrf_token %}
+    <form method="POST" enctype="multipart/form-data">
+        <div class="card">
+            <div class="card-header">
+                <h4>¿ESTA SEGURO DE ELIMINAR EL EMPLEADO?</h4>
+                <h5>Este cambio no se puede deshacer...!</h5>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title">{{object.apellidos}}, {{object.nombres}} - Legajo Nº {{object.id}}</h5>
+                            <input type="text" readonly id="empleado" name="empleado" value="{{object.id}}" hidden>
+                        </div>
+                    <div class="row">
+                        <div class="col-sm">
+                            <img id="img_thumb_personal" class="img-thumbnail" width="100" src="{{object.foto.url}}" alt="">
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-outline-danger" value="Confirmar"></input>
+                    <a class="btn btn-outline-success" href="{% url 'index' %}">Cancelar</a>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock content %}
