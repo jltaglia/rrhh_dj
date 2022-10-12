@@ -44,7 +44,13 @@ def create(request):
 
 
 class Edita_Empleado(UpdateView):
-    model = Personal    
+    model = Personal
+    fields = ['foto', 'apellidos', 'nombres', 'id_documento',
+                    'documento','cuil','fecha_nacimiento','fecha_ingreso',
+                    'id_categoria', 'id_est_civil', 'domicilio',
+                    'id_localidad', 'id_provincia', 'tel', 'email'
+                    ]
+
 
 class Detalle_Empleado(DetailView):
     model = Personal      
