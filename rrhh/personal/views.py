@@ -41,10 +41,14 @@ def create(request):
         form = Nuevo_empleado()
 
     return render(request, 'personal/create.html', {'form': form})
-        
+
+
+class Edita_Empleado(UpdateView):
+    model = Personal    
 
 class Detalle_Empleado(DetailView):
     model = Personal      
+
 
 class Baja_Empleado(DeleteView):
     model = Personal

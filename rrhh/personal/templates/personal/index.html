@@ -38,12 +38,12 @@
                             <td>{{empleado.apellidos}}</td>
                             <td>{{empleado.nombres}}</td>
                             <td>
-                                <a class="btn btn-outline-info" href="/personal/personal_detail/{{empleado.id}}">Detalle</a>
-                                <a class="btn btn-outline-primary" href="/personal/edit/{{empleado.id}}">Editar</a>
+                                <a class="btn btn-outline-info" href="{% url 'personal-detalle' empleado.id %}">Detalle</a>
+                                <a class="btn btn-outline-primary" href="{% url 'personal-edit' empleado.id %}">Editar</a>
                                 {% comment %} <a class="btn btn-outline-success" href="/licencia/{{empleado.id}}">Licencias</a> {% endcomment %}
                             </td>
                             <td>
-                                <a class="btn btn-outline-danger" href="/personal/personal_confirm_delete/{{empleado.id}}">Borrar</a>
+                                <a class="btn btn-outline-danger" href="{% url 'personal-baja' empleado.id %}">Borrar</a>
                             </td>
                         </tr>
                     {% endfor %}

@@ -1,14 +1,10 @@
-{% extends 'core/base.html' %}
-    {% with msgs= get_flashed_messages() %}
-        {% if msgs %}
-            <div class="alert alert-danger" role="alert">
-                {% for m in msgs %}
-                    {{m}}
-                {% endfor %}
-            </div>
-        {% endif %}
-    {% endwith %}
+{% extends 'personal/base.html' %}
+{% block title %}
+    - Alta
+{% endblock title %}
+{% block content %}
     <form method="POST" action="/update" enctype="multipart/form-data">
+        {% csrf_token %}
         <div class="card">
             <div class="card-header">
                 Modificar Empleado
@@ -140,7 +136,7 @@
                     <br>
                     <div class="form-group">
                         <input type="submit" class="btn btn-outline-success" value="Actualizar"></input>
-                        <a class="btn btn-outline-primary" href="{{url_for("index")}}">Cancelar</a>
+                        <a class="btn btn-outline-primary" href="{% url 'index' %}">Cancelar</a>
                     </div>
                 </p>
             </div>
