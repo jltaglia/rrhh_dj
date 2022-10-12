@@ -1,5 +1,5 @@
 from django import forms
-from .models import Personal
+from .models import Personal, Tipo_doc
 
 
 class Nuevo_empleado(forms.ModelForm):

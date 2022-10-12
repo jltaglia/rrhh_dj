@@ -34,7 +34,7 @@ def create(request):
             # redirect to a new URL:
             form.save()
             messages.success(request, f'Empleado dado de alta!') # flash message
-            return redirect('index')
+            return redirect('personal-index')
 
     # SI EL REQUEST ES UN GET:
     else:
@@ -50,13 +50,17 @@ class Edita_Empleado(UpdateView):
                     'id_categoria', 'id_est_civil', 'domicilio',
                     'id_localidad', 'id_provincia', 'tel', 'email'
                     ]
-
+    success_url = '/personal/'
 
 class Detalle_Empleado(DetailView):
     model = Personal      
-
+    fields = ['foto', 'apellidos', 'nombres', 'id_documento',
+                    'documento','cuil','fecha_nacimiento','fecha_ingreso',
+                    'id_categoria', 'id_est_civil', 'domicilio',
+                    'id_localidad', 'id_provincia', 'tel', 'email'
+                    ]
 
 class Baja_Empleado(DeleteView):
     model = Personal
-    success_url = '/'
+    success_url = '/personal/'
     
