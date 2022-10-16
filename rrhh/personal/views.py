@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.views import generic
 from .models import Personal
@@ -11,9 +11,19 @@ class Lista_Empleado(generic.ListView):
     template_name = 'personal/personal_index.html' 
 
 
+class Ingreso_Filtro_Empleado(generic.TemplateView):
+    # queryset = Personal.objects.order_by('apellidos', 'nombres').filter(apellidos='TAGLIARINI')
+    template_name = 'personal/personal_filter.html' 
+
+
 class Filtra_Empleado(generic.TemplateView):
-    model = Personal
-    template_name = 'personal/personal_form.html' 
+    # queryset = Personal.objects.order_by('apellidos', 'nombres').filter(apellidos='TAGLIARINI')
+    template_name = 'personal/personal_index.html' 
+    
+    def get_queryset(self):
+        self.apellidos = get_object_or_404(Personal, apellidos=self.kwargs['apellidos'])
+        self.nombres = get_object_or_404(Personal, nombres=self.kwargs['nombres'])
+        return Personal.objects.filter(apellidos=self.apellidos, nombres=self.nombres).order_by('apellidos', 'nombres')
     
 
 class Nuevo_Empleado(generic.CreateView):

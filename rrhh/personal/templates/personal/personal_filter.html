@@ -4,10 +4,10 @@
     - Filtrar
 {% endblock title %}
 {% block content %}
-    <form method="GET" action="/filtered" enctype="multipart/form-data">
+    <form method="GET" action="/personal/personal_filtrado/" enctype="multipart/form-data">
         <div class="card">
             <div class="card-header">
-                Filtrar los Empleados por Apellidos y/o Nombres (dejer todo en blanco para mostrar todos los empleados)
+                Filtrar los Empleados por Apellidos y/o Nombres (dejar todo en blanco para mostrar todos los empleados)
             </div>
             <div class="card-body">
                 <div class="form-group">
@@ -20,19 +20,19 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col">
-                            <label for="txtApellidos">Apellidos</label>
-                            <input id="txtApellidos" type="text" class="form-control" placeholder="Apellidos completos" aria-label="First name" name="txtApellidos" ></input>
+                            <label for="apellidos">Apellidos</label>
+                            <input id="apellidos" type="text" class="form-control" placeholder="Apellidos completos" aria-label="First name" name="apellidos" ></input>
                         </div>
                         <div class="col">
-                            <label for="txtNombres">Nombres</label>
-                            <input id="txtNombres" type="text" class="form-control" placeholder="Nombres completos" aria-label="Last name" name="txtNombres" ></input>
+                            <label for="nombres">Nombres</label>
+                            <input id="nombres" type="text" class="form-control" placeholder="Nombres completos" aria-label="Last name" name="nombres" ></input>
                         </div>
                     </div>
                 </div>
                 <br>
                 <div class="form-group">
                     <input type="submit" class="btn btn-outline-success" value="Flitrar"></input>
-                    <a class="btn btn-outline-primary" href="{% url personal-index %}">Volver</a>
+                    <a class="btn btn-outline-primary" href="{% url 'personal-index' %}">Volver</a>
                 </div>
             </div>
         </div>
