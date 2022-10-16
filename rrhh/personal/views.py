@@ -2,26 +2,18 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.views import generic
-# 
-
 from .models import Personal
 
 # Create your views here.
 
-# def index(request):
-#     # return HttpResponse('Index de Personal')
-#     empleados = Personal.objects.order_by('apellidos', 'nombres')
-#     context = {'empleados': empleados}
-#     return render(request, 'personal/index.html', context)
+class Lista_Empleado(generic.ListView):
+    queryset = Personal.objects.order_by('apellidos', 'nombres')
+    template_name = 'personal/personal_index.html' 
+
 
 class Filtra_Empleado(generic.TemplateView):
     model = Personal
     template_name = 'personal/personal_form.html' 
-
-
-class Lista_Empleado(generic.ListView):
-    model = Personal
-    template_name = 'personal/personal_index.html' 
     
 
 class Nuevo_Empleado(generic.CreateView):
@@ -47,6 +39,7 @@ class Edita_Empleado(generic.UpdateView):
 class Detalle_Empleado(generic.DetailView):
     model = Personal
     template_name = 'personal/personal_detail.html'
+    
 
 class Baja_Empleado(generic.DeleteView):
     model = Personal
