@@ -5,108 +5,30 @@
 {% endblock title %}
 {% block content %}
     {% csrf_token %}
-    <div class="card">
-        <div class="card-header">
-            Detalle del Empleado
-        </div>
-        <div class="card-body">
-            <div class="form-group">
-                <div class="row">
-                    <div class="col">
-                        <h5 class="card-title">Datos del Empleado Nº</h5>
-                    </div>
-                    <div class="col">
-                        <input id="txtIdEmpleado" type="text" class="form-control form-control-lg" aria-label="Disabled input example" name="txtIdEmpleado" value="{{object.id}}" readonly></input>
-                    </div>
-                </div>
+    <form method="GET" enctype="multipart/form-data">
+        <div class="card">
+            <div class="card-header">
+                Detalle del Empleado
             </div>
-            <p class="card-text">
+            <div class="card-body">
                 <div class="form-group">
                     <div class="row">
                         <div class="col">
-                            {{ form.apellidos|as_crispy_field }}
-                            {{ form.nombres|as_crispy_field }}
+                            <h5 class="card-title">Datos del Empleado Nº</h5>
                         </div>
                         <div class="col">
-                            {{ form.foto|as_crispy_field }}
-                        </div>
-                        <div class="col">
-                            <br>
-                            <img id="img_thumb_personal" class="img-thumbnail" width="100" src="{{object.foto.url}}" alt="">
-                        </div>
-                </div>
-                <!-- PARA HACER PREVIEW DE LA FOTO UNA VEZ SELECCIONADA -->
-                <script>
-                    txtImagen.onchange = evt => {
-                        const [file] = txtImagen.files
-                            if (file) {
-                                img_thumb_personal.src = URL.createObjectURL(file)
-                            }
-                    }
-                </script>
-                <!--  -->
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col">
-                            {{ form.id_documento|as_crispy_field }}
-                        </div>
-                        <div class="col">
-                            {{ form.documento|as_crispy_field }}
-                        </div>
-                        <div class="col">
-                            {{ form.cuil|as_crispy_field }}
+                            <input id="txtIdEmpleado" type="text" class="form-control form-control-lg" aria-label="Disabled input example" name="txtIdEmpleado" value="{{object.id}}" readonly></input>
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col">
-                            {{ form.fecha_nacimiento|as_crispy_field }}
-                        </div>
-                        <div class="col">
-                            {{ form.id_est_civil|as_crispy_field }}
-                        </div>
-
+                <p class="card-text">
+                    {{ form|crispy }}
+                    <br>
+                    <div class="form-group">
+                        <a class="btn btn-outline-primary" href="{% url 'personal-index' %}">Volver</a>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col">
-                            {{ form.fecha_ingreso|as_crispy_field }}
-                        </div>
-                        <div class="col">
-                            {{ form.id_categoria|as_crispy_field }}
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col">
-                            {{ form.domicilio|as_crispy_field }}
-                        </div>
-                        <div class="col">
-                            {{ form.id_localidad|as_crispy_field }}
-                        </div>
-                        <div class="col">
-                            {{ form.id_provincia|as_crispy_field }}
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col">
-                            {{ form.tel|as_crispy_field }}
-                        </div>
-                        <div class="col">
-                            {{ form.email|as_crispy_field }}
-                        </div>
-                    </div>
-                </div>
-                <br>
-                <div class="form-group">
-                    <a class="btn btn-outline-primary" href="{% url 'personal-index' %}">Volver</a>
-                </div>
-            </p>
+                </p>
+            </div>
         </div>
-    </div>
+    </form>
 {% endblock content %}

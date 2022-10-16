@@ -1,12 +1,11 @@
 {% extends 'personal/base.html' %}
 {% load crispy_forms_tags %}
 {% block title %}
-    - Alta
+    - Modificar
 {% endblock title %}
 {% block content %}
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        
         <div class="card">
             <div class="card-header">
                 Modificar Empleado

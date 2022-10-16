@@ -30,8 +30,8 @@
                 </tr>
             </thead>
             <tbody>
-                {% if empleados%}
-                    {% for empleado in empleados %}
+                {% if object_list %}
+                    {% for empleado in object_list %}
                         <tr>
                             <td>{{empleado.id}}</td>
                             <td><img class="img_thumb_personal" src="{{empleado.foto.url}}" alt="" class="img-thum" width = "80" height="95" ></td>
@@ -39,7 +39,7 @@
                             <td>{{empleado.nombres}}</td>
                             <td>
                                 <a class="btn btn-outline-info" href="{% url 'personal-detalle' empleado.id %}">Detalle</a>
-                                <a class="btn btn-outline-primary" href="{% url 'personal-edit' empleado.id %}">Editar</a>
+                                <a class="btn btn-outline-primary" href="{% url 'personal-editar' empleado.id %}">Editar</a>
                                 {% comment %} <a class="btn btn-outline-success" href="/licencia/{{empleado.id}}">Licencias</a> {% endcomment %}
                             </td>
                             <td>

@@ -1,6 +1,8 @@
+from email.policy import default
 from tabnanny import verbose
 from django.db import models
 from PIL import Image
+from datetime import date
 
 # Create your models here.
 class Categorias (models.Model):
@@ -55,7 +57,7 @@ class Parentescos (models.Model):
 
 class Personal (models.Model):
     foto             = models.ImageField(default='default.jpg', upload_to='fotos_pers', verbose_name='Foto Personal')
-    legajo           = models.SmallIntegerField(verbose_name='Lejajo Num.')
+    # legajo           = models.SmallIntegerField(verbose_name='Lejajo Num.')
     apellidos        = models.CharField(max_length=30, verbose_name='Apellidos')
     nombres          = models.CharField(max_length=40, verbose_name='Nombres')
     id_documento     = models.ForeignKey(Tipo_doc, on_delete=models.PROTECT, verbose_name='Tipo Documento')
@@ -71,8 +73,10 @@ class Personal (models.Model):
     id_provincia     = models.ForeignKey(Provincias, on_delete=models.PROTECT, verbose_name='Provincia')
     tel              = models.CharField(max_length=15, verbose_name='Teléfono')
     email            = models.EmailField(null=True, blank=True, verbose_name='Email')
-    saldo_licencia   = models.SmallIntegerField(verbose_name='Saldo de Licencia')
-    licencia_curso   = models.SmallIntegerField(verbose_name='Licencia en Curso')
+    # default = 14 significa que cuando se da de alta el empleado le corresponden 14 días de vacaciones
+    saldo_licencia   = models.SmallIntegerField(verbose_name='Saldo de Licencia', default = 14)
+    # La licencia en curso se inicia en el año en que se da de alta el empleado
+    licencia_curso   = models.SmallIntegerField(verbose_name='Licencia en Curso', default = int(date.today().strftime("%Y")))
     fecha_regreso    = models.DateField(null=True, blank=True, verbose_name='Fecha de Regreso')
     
     def __str__(self):

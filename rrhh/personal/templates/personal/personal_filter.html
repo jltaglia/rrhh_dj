@@ -1,14 +1,10 @@
-{% extends 'core/base.html' %}
-    {% with msgs= get_flashed_messages() %}
-        {% if msgs %}
-            <div class="alert alert-danger" role="alert">
-                {% for m in msgs %}
-                    {{m}}
-                {% endfor %}
-            </div>
-        {% endif %}
-    {% endwith %}
-    <form method="POST" action="/filtered" enctype="multipart/form-data">
+{% extends 'personal/base.html' %}
+{% load static %}
+{% block title %}
+    - Filtrar
+{% endblock title %}
+{% block content %}
+    <form method="GET" action="/filtered" enctype="multipart/form-data">
         <div class="card">
             <div class="card-header">
                 Filtrar los Empleados por Apellidos y/o Nombres (dejer todo en blanco para mostrar todos los empleados)
@@ -36,8 +32,9 @@
                 <br>
                 <div class="form-group">
                     <input type="submit" class="btn btn-outline-success" value="Flitrar"></input>
-                    <a class="btn btn-outline-primary" href="{{url_for("index")}}">Volver</a>
+                    <a class="btn btn-outline-primary" href="{% url personal-index %}">Volver</a>
                 </div>
             </div>
         </div>
     </form>
+    {% endblock content %}
