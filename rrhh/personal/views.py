@@ -12,20 +12,26 @@ class Lista_Empleado(generic.ListView):
 
 
 class Ingreso_Filtro_Empleado(generic.TemplateView):
-    # queryset = Personal.objects.order_by('apellidos', 'nombres').filter(apellidos='TAGLIARINI')
     template_name = 'personal/personal_filter.html' 
 
 
 class Filtra_Empleado(generic.TemplateView):
-    # queryset = Personal.objects.order_by('apellidos', 'nombres').filter(apellidos='TAGLIARINI')
     template_name = 'personal/personal_index.html' 
     
     def get_queryset(self):
-        self.apellidos = get_object_or_404(Personal, apellidos=self.kwargs['apellidos'])
-        self.nombres = get_object_or_404(Personal, nombres=self.kwargs['nombres'])
-        return Personal.objects.filter(apellidos=self.apellidos, nombres=self.nombres).order_by('apellidos', 'nombres')
+        self.apellidos = self.kwargs['apellidos']
+        self.nombres = self.kwargs['nombres']
+        
+        if self.nombres != '' and self.apellidos != '':
+            return Personal.objects.filter(apellidos__contains=self.apellidos.upper(), nombres__contains=self.nombres.upper()).order_by('apellidos', 'nombres')
+        elif self.apellidos != '':
+            return Personal.objects.filter(apellidos__contains=self.apellidos.upper()).order_by('apellidos', 'nombres')
+        elif self.nombres != '':
+            return Personal.objects.filter(nombres__contains=self.nombres.upper()).order_by('apellidos', 'nombres')
+        else:
+            return Personal.objects.order_by('apellidos', 'nombres')
+        
     
-
 class Nuevo_Empleado(generic.CreateView):
     model = Personal
     template_name = 'personal/personal_create_form.html'
