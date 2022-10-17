@@ -1,14 +1,12 @@
-<img
-  src="/g7_thumb.jpg"
-  alt="Alt text"
-  title="Grupo 7"
-  style="display: inline-block; margin: 0 auto; max-width: 50px">
-
-
 # PROYECTO INTEGRADOR DJANGO
 ## Codo a Codo 4.0 - 2do Cuatrimestre 2022
 
+Proyecto para la demostración del conocimiento adquirido 
+en el uso del framework django asociado al RDBMS PostgreSQL
+
+![Grupo 7](g7_thumb.jpg)
 ### Grupo 7
+### Integrantes:
 - Bellizzi, Pablo
 - Higa, Nicolás Ariel
 - Mendivil, Gustavo
