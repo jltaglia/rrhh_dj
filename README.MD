@@ -1,10 +1,8 @@
-![Grupo 7](g7.jpg)
-
 <img
   src="/g7.jpg"
   alt="Alt text"
   title="Grupo 7"
-  style="display: inline-block; margin: 0 auto; max-width: 300px">
+  style="display: inline-block; margin: 0 auto; max-width: 50px">
 
 
 # PROYECTO INTEGRADOR DJANGO
