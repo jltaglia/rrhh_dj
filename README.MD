@@ -1,3 +1,4 @@
+![Grupo 7](g7.jpg)
 # PROYECTO INTEGRADOR DJANGO
 ## Codo a Codo 4.0 - 2do Cuatrimestre 2022
 
