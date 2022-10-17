@@ -1,5 +1,5 @@
 <img
-  src="/g7.jpg"
+  src="/g7_thumb.jpg"
   alt="Alt text"
   title="Grupo 7"
   style="display: inline-block; margin: 0 auto; max-width: 50px">
