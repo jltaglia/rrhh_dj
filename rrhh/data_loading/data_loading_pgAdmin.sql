@@ -23,6 +23,11 @@ FROM 'C:/Users/Public/Documents/csv/provincias.csv'
 DELIMITER ';' 
 CSV HEADER;
 
+COPY personal_localidades
+FROM 'C:/Users/Public/Documents/csv/localidades_reduc.csv' 
+DELIMITER ';' 
+CSV HEADER;
+
 COPY personal_tipo_doc
 FROM 'C:/Users/Public/Documents/csv/tipo_doc.csv' 
 DELIMITER ';' 
@@ -33,7 +38,3 @@ FROM 'C:/Users/Public/Documents/csv/personal.csv'
 DELIMITER ';' 
 CSV HEADER;
 
-COPY personal_localidades
-FROM 'C:/Users/Public/Documents/csv/localidades_reduc.csv' 
-DELIMITER ';' 
-CSV HEADER;
