@@ -63,7 +63,11 @@ class Edita_Empleado(UpdateView):
 class Detalle_Empleado(DetailView):
     model = Personal
     template_name = 'personal/personal_detail.html'
-    
+    fields = ['foto', 'apellidos', 'nombres', 'id_documento',
+                    'documento','cuil','fecha_nacimiento','fecha_ingreso',
+                    'id_categoria', 'id_est_civil', 'domicilio',
+                    'id_localidad', 'id_provincia', 'tel', 'email'
+                    ]
 
 class Baja_Empleado(DeleteView):
     model = Personal
