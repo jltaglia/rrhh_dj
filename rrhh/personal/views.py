@@ -15,19 +15,20 @@ class Ingreso_Filtro_Empleado(generic.TemplateView):
     template_name = 'personal/personal_filter.html' 
 
 
-class Filtra_Empleado(generic.TemplateView):
+class Filtra_Empleado(generic.ListView):
+    model = Personal
     template_name = 'personal/personal_index.html' 
-    
+
     def get_queryset(self):
-        self.apellidos = self.kwargs['apellidos']
-        self.nombres = self.kwargs['nombres']
+        p_apellidos = self.kwargs.get('apellidos')
+        p_nombres = self.kwargs.get('nombres')
         
-        if self.nombres != '' and self.apellidos != '':
-            return Personal.objects.filter(apellidos__contains=self.apellidos.upper(), nombres__contains=self.nombres.upper()).order_by('apellidos', 'nombres')
-        elif self.apellidos != '':
-            return Personal.objects.filter(apellidos__contains=self.apellidos.upper()).order_by('apellidos', 'nombres')
-        elif self.nombres != '':
-            return Personal.objects.filter(nombres__contains=self.nombres.upper()).order_by('apellidos', 'nombres')
+        if p_nombres != '' and p_apellidos != '':
+            return Personal.objects.filter(apellidos__contains=p_apellidos.upper(), nombres__contains=p_nombres.upper()).order_by('apellidos', 'nombres')
+        elif p_apellidos != '':
+            return Personal.objects.filter(apellidos__contains=p_apellidos.upper()).order_by('apellidos', 'nombres')
+        elif p_nombres != '':
+            return Personal.objects.filter(nombres__contains=p_nombres.upper()).order_by('apellidos', 'nombres')
         else:
             return Personal.objects.order_by('apellidos', 'nombres')
         
