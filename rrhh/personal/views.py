@@ -1,21 +1,28 @@
-from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib import messages
-from django.views import generic
+from django.views.generic import (ListView,
+                                  TemplateView,
+                                  CreateView,
+                                  UpdateView,
+                                  DetailView,
+                                  DeleteView)
 from .models import Personal
 
 # Create your views here.
 
-class Lista_Empleado(generic.ListView):
+class Lista_Empleado(ListView):
     queryset = Personal.objects.order_by('apellidos', 'nombres')
     template_name = 'personal/personal_index.html' 
 
 
-class Ingreso_Filtro_Empleado(generic.TemplateView):
-    template_name = 'personal/personal_filter.html' 
+class Ingreso_Filtro_Empleado(TemplateView):
+    model = Personal
+    template_name = 'personal/personal_filter.html'
+    
+    def get_queryset(self): 
+        return Personal.objects.order_by('apellidos', 'nombres')
 
 
-class Filtra_Empleado(generic.ListView):
+class Filtra_Empleado(ListView):
     model = Personal
     template_name = 'personal/personal_index.html' 
 
@@ -33,7 +40,7 @@ class Filtra_Empleado(generic.ListView):
             return Personal.objects.order_by('apellidos', 'nombres')
         
     
-class Nuevo_Empleado(generic.CreateView):
+class Nuevo_Empleado(CreateView):
     model = Personal
     template_name = 'personal/personal_create_form.html'
     fields = ['foto', 'apellidos', 'nombres', 'id_documento',
@@ -42,7 +49,7 @@ class Nuevo_Empleado(generic.CreateView):
                     'id_localidad', 'id_provincia', 'tel', 'email'
                     ]
 
-class Edita_Empleado(generic.UpdateView):
+class Edita_Empleado(UpdateView):
     model = Personal
     template_name = 'personal/personal_form.html' 
     fields = ['foto', 'apellidos', 'nombres', 'id_documento',
@@ -53,12 +60,12 @@ class Edita_Empleado(generic.UpdateView):
     success_url = '/personal/'
 
 
-class Detalle_Empleado(generic.DetailView):
+class Detalle_Empleado(DetailView):
     model = Personal
     template_name = 'personal/personal_detail.html'
     
 
-class Baja_Empleado(generic.DeleteView):
+class Baja_Empleado(DeleteView):
     model = Personal
     template_name = 'personal/personal_confirm_delete.html' 
     success_url = '/personal/'
