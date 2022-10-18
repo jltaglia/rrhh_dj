@@ -57,7 +57,6 @@ class Parentescos (models.Model):
 
 class Personal (models.Model):
     foto             = models.ImageField(default='default.jpg', upload_to='fotos_pers', verbose_name='Foto Personal')
-    # legajo           = models.SmallIntegerField(verbose_name='Lejajo Num.')
     apellidos        = models.CharField(max_length=30, verbose_name='Apellidos')
     nombres          = models.CharField(max_length=40, verbose_name='Nombres')
     id_documento     = models.ForeignKey(Tipo_doc, on_delete=models.PROTECT, verbose_name='Tipo Documento')

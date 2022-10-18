@@ -16,6 +16,7 @@ class Lista_Empleado(ListView):
 
 class Ingreso_Filtro_Empleado(TemplateView):
     model = Personal
+    fields = ['apellidos', 'nombres']
     template_name = 'personal/personal_filter.html'
     
     def get_queryset(self): 
@@ -48,6 +49,7 @@ class Nuevo_Empleado(CreateView):
                     'id_categoria', 'id_est_civil', 'domicilio',
                     'id_localidad', 'id_provincia', 'tel', 'email'
                     ]
+    success_url = '/personal/'
 
 class Edita_Empleado(UpdateView):
     model = Personal

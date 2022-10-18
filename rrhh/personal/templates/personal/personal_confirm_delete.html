@@ -3,8 +3,8 @@
     - Baja
 {% endblock title %}
 {% block content %}
-    {% csrf_token %}
     <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
         <div class="card">
             <div class="card-header">
                 <h4>¿ESTA SEGURO DE ELIMINAR EL EMPLEADO?</h4>
