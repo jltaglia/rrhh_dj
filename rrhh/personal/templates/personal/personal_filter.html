@@ -4,7 +4,7 @@
     - Filtrar
 {% endblock title %}
 {% block content %}
-    <form method="GET" action="/personal/personal_filtrado/" enctype="multipart/form-data">
+    <form method="POST" action="/personal/personal_filtrado/" enctype="multipart/form-data">
         <div class="card">
             <div class="card-header">
                 Filtrar los Empleados por Apellidos y/o Nombres (dejar todo en blanco para mostrar todos los empleados)
@@ -21,17 +21,17 @@
                     <div class="row">
                         <div class="col">
                             <label for="apellidos">Apellidos</label>
-                            <input id="apellidos" type="text" class="form-control" placeholder="Apellidos completos" aria-label="First name" name="apellidos" ></input>
+                            <input id="apellidos" type="text" class="form-control" placeholder="Apellidos completos" aria-label="First name" name="{{object.apellidos}}" value="{{object.apellidos}}"></input>
                         </div>
                         <div class="col">
                             <label for="nombres">Nombres</label>
-                            <input id="nombres" type="text" class="form-control" placeholder="Nombres completos" aria-label="Last name" name="nombres" ></input>
+                            <input id="nombres" type="text" class="form-control" placeholder="Nombres completos" aria-label="Last name" name="{{object.apellidos}}" value="{{object.apellidos}}"></input>
                         </div>
                     </div>
                 </div>
                 <br>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-outline-success" value="Flitrar"></input>
+                    <a class="btn btn-outline-success" href="{% url 'personal-filtrar' apellidos=object.apellidos nombres=object.nombres %}">Filtrar</a>
                     <a class="btn btn-outline-primary" href="{% url 'personal-index' %}">Volver</a>
                 </div>
             </div>
