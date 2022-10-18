@@ -6,8 +6,6 @@ DE ACCESO A DICHA CARPETA PARA QUE PUEDA ABRIRLOS SIN
 PROBLEMAS
  */
 
-
-
 COPY personal_categorias 
 FROM 'C:/Users/Public/Documents/csv/categorias.csv' 
 DELIMITER ';' 
