@@ -26,20 +26,21 @@ class Ingreso_Filtro_Empleado(TemplateView):
 class Filtra_Empleado(ListView):
     model = Personal
     template_name = 'personal/personal_index.html' 
-
+    
     def get_queryset(self):
-        p_apellidos = self.kwargs.get('apellidos')
-        p_nombres = self.kwargs.get('nombres')
-        
-        if p_nombres != '' and p_apellidos != '':
-            return Personal.objects.filter(apellidos__contains=p_apellidos.upper(), nombres__contains=p_nombres.upper()).order_by('apellidos', 'nombres')
-        elif p_apellidos != '':
-            return Personal.objects.filter(apellidos__contains=p_apellidos.upper()).order_by('apellidos', 'nombres')
-        elif p_nombres != '':
-            return Personal.objects.filter(nombres__contains=p_nombres.upper()).order_by('apellidos', 'nombres')
+
+        apellidos = self.request.GET.get("apellidos", None)
+        nombres = self.request.GET.get("nombres", None)
+     
+        if nombres != '' and apellidos != '':
+            return Personal.objects.filter(apellidos__contains=apellidos.upper(), nombres__contains=nombres.upper()).order_by('apellidos', 'nombres') 
+        elif apellidos != '':
+            return Personal.objects.filter(apellidos__contains=apellidos.upper()).order_by('apellidos', 'nombres')
+        elif nombres != '':
+            return Personal.objects.filter(nombres__contains=nombres.upper()).order_by('apellidos', 'nombres')
         else:
             return Personal.objects.order_by('apellidos', 'nombres')
-        
+
     
 class Nuevo_Empleado(CreateView):
     model = Personal
