@@ -1,1 +1,2 @@
-web: gunicorn rrhh_dj.wsgi
+web: gunicorn PROJECT_NAME.wsgi
+
