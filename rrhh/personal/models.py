@@ -77,14 +77,17 @@ class Personal (models.Model):
     # La licencia en curso se inicia en el año en que se da de alta el empleado
     licencia_curso   = models.SmallIntegerField(verbose_name='Licencia en Curso', default = int(date.today().strftime("%Y")))
     fecha_regreso    = models.DateField(null=True, blank=True, verbose_name='Fecha de Regreso')
-    
+        
+    class Meta:
+        verbose_name = 'personal'
+        verbose_name_plural = 'Personal'
+        
     def __str__(self):
         return self.apellidos.upper() + ', ' + self.nombres
-
     
-    # SE MODIFICA EL METODO SAVE() POR LAS DUDAS QUE
-    # LA FOTO ELEGIDA PARA EL EMPLEADO SEA MUY GRANDE
     def save(self, *args, **kwargs ):
+        # SE MODIFICA EL METODO SAVE() POR LAS DUDAS QUE
+        # LA FOTO ELEGIDA PARA EL EMPLEADO SEA MUY GRANDE
         super().save(*args, **kwargs)
 
         img = Image.open(self.foto.path)
