@@ -1,0 +1,1 @@
+web: gunicorn rrhh_dj.wsgi
