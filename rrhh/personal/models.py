@@ -55,12 +55,18 @@ class Parentescos (models.Model):
 
     def __str__(self):
         return self.descripcion
+    
+class NameField(models.CharField):
+    def __init__(self, *args, **kwargs):
+        super(NameField, self).__init__(*args, **kwargs)
 
+    def get_prep_value(self, value):
+        return str(value).upper()
 
 class Personal (models.Model):
     foto             = models.ImageField(default='default.jpg', upload_to='fotos_pers', verbose_name='Foto Personal')
-    apellidos        = models.CharField(max_length=30, verbose_name='Apellidos')
-    nombres          = models.CharField(max_length=40, verbose_name='Nombres')
+    apellidos        = NameField(max_length=30, verbose_name='Apellidos')
+    nombres          = NameField(max_length=40, verbose_name='Nombres')
     id_documento     = models.ForeignKey(Tipo_doc, on_delete=models.PROTECT, verbose_name='Tipo Documento')
     documento        = models.CharField(max_length=8, verbose_name='Num. Documento', validators=[va.validate_dni])
     cuil             = models.CharField(max_length=11, verbose_name='CUIL',  validators=[va.validate_cuil])

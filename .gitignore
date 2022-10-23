@@ -1,3 +1,5 @@
 varios_NO_GIT
 licencias
 __pycache__
+.vscode/launch.json
+.gitignore
