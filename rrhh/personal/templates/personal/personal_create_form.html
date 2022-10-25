@@ -36,12 +36,12 @@
                                     <br>
                                     <img id="img_thumb_personal" class="img-thumbnail" width="100" src="{{form.foto.url}}" alt="">
                                 </div>
+                            </div>
                         </div>
                         <!-- PARA HACER PREVIEW DE LA FOTO UNA VEZ SELECCIONADA -->
                         <script>
-                            foto_pers = {{ form.foto.url }}
-                            foto_pers.onchange = evt => {
-                                const [file] = foto_pers.files
+                            id_foto.onchange = evt => {
+                                const [file] = id_foto.files
                                     if (file) {
                                         img_thumb_personal.src = URL.createObjectURL(file)
                                     }

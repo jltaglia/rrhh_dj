@@ -1,9 +1,6 @@
-from email.policy import default
-from tabnanny import verbose
 from django.db import models
 from PIL import Image
 from datetime import date
-
 import personal.validators as va
 
 # Create your models here.

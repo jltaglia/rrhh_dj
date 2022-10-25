@@ -23,23 +23,22 @@ def validate_cuil(value):
     if len(value) < 11:
         raise ValidationError(_('El CUIL debe tener 11 dígitos'), code='invalid')
 
-    #
+    
     # CALCULO Y COMPROBACION DEL DIGITO VERIFICADOR DEL CUIL
+    base = [5, 4, 3, 2, 7, 6, 5, 4, 3, 2]
+    aux = 0
+    for i in range(10):
+        aux += int(value[i]) * base[i]
+
+    aux = 11 - (aux - (int(aux / 11) * 11))
+    if aux == 11:
+        aux = 0
+    if aux == 10:
+        aux = 9
+
+    if not aux == int(value[10]):
+        raise ValidationError(_('El CUIL es incorrecto!'), code='invalid')
     # 
-    # base = [5, 4, 3, 2, 7, 6, 5, 4, 3, 2]
-    # aux = 0
-    # for i in range(10):
-    #     aux += int(value[i]) * base[i]
-
-    # aux = 11 - (aux - (int(aux / 11) * 11))
-    # if aux == 11:
-    #     aux = 0
-    # if aux == 10:
-    #     aux = 9
-    # #
-    # if not aux == int(value[10]):
-    #     raise ValidationError(_('El CUIL es incorrecto!'), code='invalid')
-
 
 def validate_fecha_nacimiento(value):
     """

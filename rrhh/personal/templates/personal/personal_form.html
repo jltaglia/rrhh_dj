@@ -33,10 +33,19 @@
                             </div>
                             <div class="col">
                                 <br>
-                                <img id="img_thumb_personal" class="img-thumbnail" width="100" src="{{object.foto.url}}" alt="">
+                                <img id="img_thumb_personal" class="img-thumbnail" width="100" src="{{object.foto.url}}" alt="Foto del Empleado">
                             </div>
                     </div>
-                    
+                    <!-- PARA HACER PREVIEW DE LA FOTO UNA VEZ SELECCIONADA -->
+                    <script>
+                        id_foto.onchange = evt => {
+                            const [file] = id_foto.files
+                                if (file) {
+                                    img_thumb_personal.src = URL.createObjectURL(file)
+                                }
+                        }
+                    </script> 
+                    <!--  -->
                     <div class="form-group">
                         <div class="row">
                             <div class="col">

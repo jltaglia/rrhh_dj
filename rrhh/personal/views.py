@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import (ListView,
                                   TemplateView,
                                   CreateView,
@@ -42,7 +42,7 @@ class Filtra_Empleado(ListView):
             return Personal.objects.order_by('apellidos', 'nombres')
 
     
-class Nuevo_Empleado(CreateView):
+class Nuevo_Empleado(SuccessMessageMixin, CreateView):
     model = Personal
     template_name = 'personal/personal_create_form.html'
     fields = ['foto', 'apellidos', 'nombres', 'id_documento',
@@ -50,9 +50,10 @@ class Nuevo_Empleado(CreateView):
                     'id_categoria', 'id_est_civil', 'domicilio',
                     'id_localidad', 'id_provincia', 'tel', 'email'
                     ]
+    success_message = "El empleado ha sido dado de alta con exito!"
     success_url = '/personal/'
 
-class Edita_Empleado(UpdateView):
+class Edita_Empleado(SuccessMessageMixin, UpdateView):
     model = Personal
     template_name = 'personal/personal_form.html' 
     fields = ['foto', 'apellidos', 'nombres', 'id_documento',
@@ -60,6 +61,8 @@ class Edita_Empleado(UpdateView):
                     'id_categoria', 'id_est_civil', 'domicilio',
                     'id_localidad', 'id_provincia', 'tel', 'email'
                     ]
+    
+    success_message = "Los datos del empleado han sido modificados con exito!"
     success_url = '/personal/'
 
 
@@ -68,8 +71,9 @@ class Detalle_Empleado(DetailView):
     template_name = 'personal/personal_detail.html'
 
 
-class Baja_Empleado(DeleteView):
+class Baja_Empleado(SuccessMessageMixin, DeleteView):
     model = Personal
     template_name = 'personal/personal_confirm_delete.html' 
+    success_message = "El empleado han sido dado de baja!"
     success_url = '/personal/'
     
