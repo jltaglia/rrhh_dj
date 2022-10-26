@@ -21,6 +21,7 @@
         <table class="table table-dark table-hover">
             <thead class="thead-light">
                 <tr>
+
                     <th>Leg</th>
                     <th>Foto</th>
                     <th>Apellidos</th>
@@ -33,6 +34,7 @@
                 {% if object_list %}
                     {% for empleado in object_list %}
                         <tr>
+
                             <td>{{empleado.id}}</td>
                             <td><img class="img_thumb_personal" src="{{empleado.foto.url}}" alt="" class="img-thum" width = "80" height="95" ></td>
                             <td>{{empleado.apellidos}}</td>
