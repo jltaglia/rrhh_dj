@@ -146,3 +146,5 @@ CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 import django_on_heroku
 django_on_heroku.settings(locals())
+
+CSRF_TRUSTED_ORIGINS = ["https://pure-shelf-64931.herokuapp.com"]
