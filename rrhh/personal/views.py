@@ -11,7 +11,7 @@ from .models import Personal
 
 class Lista_Empleado(ListView):
     queryset = Personal.objects.order_by('apellidos', 'nombres')
-    template_name = 'personal/personal_index.html' 
+    template_name = 'personal/personal_index.html'
 
 
 class Ingreso_Filtro_Empleado(TemplateView):
