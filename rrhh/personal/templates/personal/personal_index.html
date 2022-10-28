@@ -22,49 +22,51 @@
             <h5 class="card-title">Se muestran {{object_list.count}} registros de empleados.</h5>
         </div>
     </div>
-    <div>
-        <table class="table table-dark table-hover">
-            <thead class="thead-light">
-                <tr>
-                    <th>Leg</th>
-                    <th>Foto</th>
-                    <th>Apellidos</th>
-                    <th>Nombres</th>
-                    <th>Acciones</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                {% if object_list %}
-                    {% for empleado in object_list %}
-                        <tr>
-                            <td>{{empleado.id}}</td>
-                            <td><img class="img_thumb_personal" src="{{empleado.foto.url}}" alt="" class="img-thum" width = "80" height="95" ></td>
-                            <td>{{empleado.apellidos}}</td>
-                            <td>{{empleado.nombres}}</td>
-                            <td>
-                                <a class="btn btn-outline-info" href="{% url 'personal-detalle' empleado.id %}">Detalle</a>
-                                <a class="btn btn-outline-primary" href="{% url 'personal-editar' empleado.id %}">Editar</a>
-                                {% comment %} <a class="btn btn-outline-success" href="/licencia/{{empleado.id}}">Licencias</a> {% endcomment %}
-                            </td>
-                            <td>
-                                <a class="btn btn-outline-danger" href="{% url 'personal-baja' empleado.id %}">Borrar</a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                {% else %}
-                        <tr>
-                            <td>No hay empleados para mostrar</td>
-                            <td>---</td>
-                            <td>---</td>
-                            <td>---</td>
-                            <td>---</td>
-                            <td></td>
-                        <tr>
-                {% endif %}
-            </tbody>
-            <tfoot>
-            </tfoot>
-        </table>
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-dark table-hover table align-middle table-responsive">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Leg</th>
+                        <th>Foto</th>
+                        <th>Apellidos</th>
+                        <th>Nombres</th>
+                        <th>Acciones</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    {% if object_list %}
+                        {% for empleado in object_list %}
+                            <tr>
+                                <td>{{empleado.id}}</td>
+                                <td><img class="img_thumb_personal" src="{{empleado.foto.url}}" alt="" class="img-thum" width = "80" height="95" ></td>
+                                <td>{{empleado.apellidos}}</td>
+                                <td>{{empleado.nombres}}</td>
+                                <td>
+                                    <a class="btn btn-outline-info" href="{% url 'personal-detalle' empleado.id %}">Detalle</a>
+                                    <a class="btn btn-outline-primary" href="{% url 'personal-editar' empleado.id %}">Editar</a>
+                                    {% comment %} <a class="btn btn-outline-success" href="/licencia/{{empleado.id}}">Licencias</a> {% endcomment %}
+                                </td>
+                                <td>
+                                    <a class="btn btn-outline-danger" href="{% url 'personal-baja' empleado.id %}">Borrar</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                            <tr>
+                                <td>No hay empleados para mostrar</td>
+                                <td>---</td>
+                                <td>---</td>
+                                <td>---</td>
+                                <td>---</td>
+                                <td></td>
+                            <tr>
+                    {% endif %}
+                </tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+        </div>
     </div>
 {% endblock content %}
