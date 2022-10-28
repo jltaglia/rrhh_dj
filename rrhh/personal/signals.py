@@ -35,7 +35,7 @@ def auto_delete_foto_on_change(sender, instance, **kwargs):
     # COMPARA LA FOTO NUEVA CON LA ANTERIOR
     file = instance.foto.path
     if not old_file == file:
-        if os.path.isfile(old_file) and old_file not in "media/default.jpg":
+        if os.path.isfile(old_file) and old_file not in "default.jpg":
             os.remove(old_file)
             
 
