@@ -54,14 +54,16 @@ class Parentescos (models.Model):
 
     def __str__(self):
         return self.descripcion
-    
+
+#Modifico el campo charfield para que siempre esté en mayusculas (para los campos de Nombres y Apellidos)    
 class NameField(models.CharField):
     def __init__(self, *args, **kwargs):
         super(NameField, self).__init__(*args, **kwargs)
 
     def get_prep_value(self, value):
         return str(value).upper()
-    
+
+#Renombro las fotos subidas a DiaMesAñoHoraMinutoSegundo.ext
 def renombro_fotos(instance, filename):
     archivo_foto = filename.split('.')[-1]
     filename = datetime.datetime.now().strftime("%d%m%Y%H%M%S") + '.' + archivo_foto
