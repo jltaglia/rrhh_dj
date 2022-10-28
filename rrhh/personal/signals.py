@@ -9,7 +9,7 @@ def auto_delete_foto_on_delete(sender, instance, **kwargs):
     """
     Borra el archivo de imagen del sistema de archivos
     cuando el objeto al cual pertenece la imagen es
-    borrado de la base de datos (el empleado es dado de baja).
+    borrado de la base de datos (el empleado es dado de baja). and instance.foto != "default.jpg"
     """
     if instance.foto and instance.foto != "default.jpg":
         if os.path.isfile(instance.foto.path):
@@ -35,9 +35,7 @@ def auto_delete_foto_on_change(sender, instance, **kwargs):
     # COMPARA LA FOTO NUEVA CON LA ANTERIOR
     file = instance.foto.path
     if not old_file == file:
-        if os.path.isfile(old_file) and old_file not in "default.jpg":
-            print(file)
-            print(old_file)
+        if os.path.isfile(old_file) and old_file not in "media/default.jpg":
             os.remove(old_file)
             
 
