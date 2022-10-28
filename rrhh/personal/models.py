@@ -99,9 +99,7 @@ class Personal (models.Model):
         
     def __str__(self):
         return self.apellidos.upper() + ', ' + self.nombres
-    
-
-    
+   
     def save(self, *args, **kwargs ):
         # SE MODIFICA EL METODO SAVE() POR LAS DUDAS QUE
         # LA FOTO ELEGIDA PARA EL EMPLEADO SEA MUY GRANDE
