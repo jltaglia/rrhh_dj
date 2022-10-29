@@ -63,15 +63,9 @@ class NameField(models.CharField):
     def get_prep_value(self, value):
         return str(value).upper()
 
-#Renombro las fotos subidas a DiaMesAñoHoraMinutoSegundo.ext
-def renombro_fotos(instance, filename):
-    archivo_foto = filename.split('.')[-1]
-    filename = datetime.datetime.now().strftime("%d%m%Y%H%M%S") + '.' + archivo_foto
-    # filename = "%s_%s_%s.%s" % (instance.apellidos , instance.nombres, instance.cuil, archivo_foto)
-    return os.path.join('fotos_pers', filename)
 
 class Personal (models.Model):
-    foto             = models.ImageField(default='default.jpg', upload_to=renombro_fotos, verbose_name='Foto Personal')
+    foto             = models.ImageField(default='default.jpg', upload_to='fotos_pers', verbose_name='Foto Personal')
     apellidos        = NameField(max_length=30, verbose_name='Apellidos')
     nombres          = NameField(max_length=40, verbose_name='Nombres')
     id_documento     = models.ForeignKey(Tipo_doc, on_delete=models.PROTECT, verbose_name='Tipo Documento')
@@ -101,12 +95,20 @@ class Personal (models.Model):
         return self.apellidos.upper() + ', ' + self.nombres
    
     def save(self, *args, **kwargs ):
-        # SE MODIFICA EL METODO SAVE() POR LAS DUDAS QUE
-        # LA FOTO ELEGIDA PARA EL EMPLEADO SEA MUY GRANDE
+        # SE MODIFICA EL METODO SAVE()...
+        
+        # ...PARA CAMBIAR EL NOMBRE DEL ARCHIVO
+        # ELEGIDO PARA EL EMPLEADO Y ANONIMIZARLO
+        ext_archivo = self.foto.name.split('.')[-1]        
+        self.foto.name = datetime.datetime.now().strftime("%d%m%Y%H%M%S") + '.' + ext_archivo
+        
         super().save(*args, **kwargs)
+        
+        # ...Y POR LAS DUDAS QUE LA FOTO ELEGIDA
+        # PARA EL EMPLEADO SEA MUY GRANDE
         img = Image.open(self.foto.path)
-
         if img.height > 300 or img.width > 300:
             output_size = (300, 300)
             img.thumbnail(output_size)
             img.save(self.foto.path)
+         
