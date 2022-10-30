@@ -32,7 +32,6 @@
                         <th>Apellidos</th>
                         <th>Nombres</th>
                         <th>Acciones</th>
-                        <th></th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
@@ -44,12 +43,12 @@
                                 <td>{{empleado.apellidos}}</td>
                                 <td>{{empleado.nombres}}</td>
                                 <td>
-                                    <a class="btn btn-outline-info" href="{% url 'personal-detalle' empleado.id %}">Detalle</a>
-                                    <a class="btn btn-outline-primary" href="{% url 'personal-editar' empleado.id %}">Editar</a>
-                                    {% comment %} <a class="btn btn-outline-success" href="/licencia/{{empleado.id}}">Licencias</a> {% endcomment %}
-                                </td>
-                                <td>
-                                    <a class="btn btn-outline-danger" href="{% url 'personal-baja' empleado.id %}">Borrar</a>
+                                    <div class="d-grid d-md-block mx-auto">
+                                        <a class="btn btn-outline-info" href="{% url 'personal-detalle' empleado.id %}">Detalle</a>
+                                        <a class="btn btn-outline-primary" href="{% url 'personal-editar' empleado.id %}">Editar</a>
+                                        <a class="btn btn-outline-warning" href="#">Licencias</a>
+                                        <a class="btn btn-outline-danger" href="{% url 'personal-baja' empleado.id %}">Borrar</a>
+                                    </div>
                                 </td>
                             </tr>
                         {% endfor %}

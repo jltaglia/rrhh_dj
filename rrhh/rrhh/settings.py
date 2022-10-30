@@ -26,9 +26,6 @@ SECRET_KEY = 'django-insecure-n@a0itpp(iuk5-3+mwfzscvxve850q_)oz28opim57em%fn9&6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -79,6 +76,22 @@ WSGI_APPLICATION = 'rrhh.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# Settings for use in PythonAnywhere
+#
+# ALLOWED_HOSTS = ['jltaglia2.pythonanywhere.com']
+# DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.mysql',
+#             'NAME': 'jltaglia2$rrhh',
+#             'USER': 'jltaglia2',
+#             'PASSWORD': 'django2022',
+#             'HOST': 'jltaglia2.mysql.pythonanywhere-services.com',
+#             'PORT': '',
+#         }
+#     }
+
+# Settings for my PC
+#
 DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -126,9 +139,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
+      BASE_DIR / "static",
+  ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -141,8 +155,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
-
-# Para subirlo a Heroku:
-# import django_on_heroku
-# django_on_heroku.settings(locals())
-# CSRF_TRUSTED_ORIGINS = ["https://pure-shelf-64931.herokuapp.com"]

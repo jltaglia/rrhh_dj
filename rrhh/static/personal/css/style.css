@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@1,300;1,900&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@1,300;1,900&display=swap'); */
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Lato', sans-serif;
+    /* font-family: 'Lato', sans-serif; */
 }
 
 html {
@@ -21,7 +21,7 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    background-color: rgba(77, 116, 140, 0.8);
+    background-color: rgba(39, 41, 42, 0.8);
     /* -------------------------------------------- */
 }
 
