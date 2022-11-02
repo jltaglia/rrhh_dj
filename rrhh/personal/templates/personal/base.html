@@ -14,7 +14,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'personal-index' %}">RRHH</a>
+            <a class="navbar-brand" href="{% url 'personal:personal-index' %}">RRHH</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -22,13 +22,13 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link nav-link" href="{% url 'personal-index' %}">Padrón</a>
+                        <a class="nav-link nav-link" href="{% url 'personal:personal-index' %}">Padrón</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-link" href="{% url 'personal-filtro' %}">Filtrar</a>
+                        <a class="nav-link nav-link" href="{% url 'personal:personal-filtro' %}">Filtrar</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link nav-link" href="{% url 'personal-alta' %}" tabindex="-1">Alta</a>
+                        <a class="nav-link nav-link" href="{% url 'personal:personal-alta' %}" tabindex="-1">Alta</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav">
