@@ -52,7 +52,6 @@ class Nuevo_Empleado(SuccessMessageMixin, CreateView):
                     'id_localidad', 'id_provincia', 'tel', 'email'
                     ]
     success_message = "El empleado ha sido dado de alta con exito!"
-    # success_url = '/personal/'
     success_url = reverse_lazy('personal:personal-index')
 
 class Edita_Empleado(SuccessMessageMixin, UpdateView):
@@ -65,7 +64,6 @@ class Edita_Empleado(SuccessMessageMixin, UpdateView):
                     ]
     
     success_message = "Los datos del empleado han sido modificados con exito!"
-    # success_url = '/personal/'
     success_url = reverse_lazy('personal:personal-index')
 
 
@@ -78,5 +76,5 @@ class Baja_Empleado(SuccessMessageMixin, DeleteView):
     model = Personal
     template_name = 'personal/personal_confirm_delete.html' 
     success_message = "El empleado han sido dado de baja!"
-    success_url = '/personal/'
+    success_url = reverse_lazy('personal:personal-index')
     

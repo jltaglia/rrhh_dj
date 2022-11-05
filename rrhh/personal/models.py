@@ -90,25 +90,36 @@ class Personal (models.Model):
     class Meta:
         verbose_name = 'personal'
         verbose_name_plural = 'Personal'
+
+    def __init__(self, *args, **kwargs):
+        super(Personal, self).__init__(*args, **kwargs)
+        self.foto_old_name = self.foto.name
         
     def __str__(self):
         return self.apellidos.upper() + ', ' + self.nombres
    
     def save(self, *args, **kwargs ):
-        # SE MODIFICA EL METODO SAVE()...
+        # SE SOBREESCRIBE EL METODO SAVE()...
+
+        if self.foto.name != self.foto_old_name:
+        # SI LA FOTO CAMBIA (POR ALTA O MODIFICACION)
+
+            # ...PARA CAMBIAR EL NOMBRE DEL ARCHIVO
+            # ELEGIDO PARA EL EMPLEADO Y ANONIMIZARLO
+            ext_archivo = self.foto.name.split('.')[-1]        
+            # self.foto.name = 'fotos_pers/' + datetime.datetime.now().strftime("%d%m%Y%H%M%S") + '.' + ext_archivo
+            self.foto.name = datetime.datetime.now().strftime("%d%m%Y%H%M%S") + '.' + ext_archivo
+            super().save(*args, **kwargs)
         
-        # ...PARA CAMBIAR EL NOMBRE DEL ARCHIVO
-        # ELEGIDO PARA EL EMPLEADO Y ANONIMIZARLO
-        ext_archivo = self.foto.name.split('.')[-1]        
-        self.foto.name = datetime.datetime.now().strftime("%d%m%Y%H%M%S") + '.' + ext_archivo
+            # ...Y POR LAS DUDAS QUE LA FOTO ELEGIDA
+            # PARA EL EMPLEADO SEA MUY GRANDE
+            img = Image.open(self.foto.path)
+            if img.height > 300 or img.width > 300:
+                output_size = (300, 300)
+                img.thumbnail(output_size)
+                img.save(self.foto.path)
         
-        super().save(*args, **kwargs)
+        else:
+            super().save(*args, **kwargs)
+            
         
-        # ...Y POR LAS DUDAS QUE LA FOTO ELEGIDA
-        # PARA EL EMPLEADO SEA MUY GRANDE
-        img = Image.open(self.foto.path)
-        if img.height > 300 or img.width > 300:
-            output_size = (300, 300)
-            img.thumbnail(output_size)
-            img.save(self.foto.path)
-         
