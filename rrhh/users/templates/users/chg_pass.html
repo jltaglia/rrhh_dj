@@ -1,0 +1,37 @@
+{% extends "personal/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}
+- Cambio de Contraseña
+{% endblock title %}
+{% block content %}
+
+    <div class="content-section">
+        <form method="POST"> {% csrf_token %}
+            <div class="card text-bg-secondary mb-3">
+                <div class="card-header">
+                    <div class="form-group">
+                        <div class="row">
+                            <legend class="mb-1">Cambio de contraseña</legend>
+                            <p>Por favor, por razones de seguridad, introduzca primero su contraseña antigua.<br>
+                            Luego introduzca la nueva contraseña dos veces para verificar que la ha escrito correctamente.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body text-bg-light">
+                    <div class="col-md-4">
+                        <fieldset class="form-group">
+                            {{ form|crispy }}
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="card-footer text-bg-secondary">
+                    <div class="col-md-4">        
+                        <input type="submit" value="Cambiar mi contraseña" class="btn btn-success">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+{% endblock content%}

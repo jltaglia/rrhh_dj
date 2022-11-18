@@ -7,6 +7,9 @@ from django.views.generic import (ListView,
                                   DetailView,
                                   DeleteView)
 from .models import Personal
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+from .forms import PersonalForm
 
 # Create your views here.
 
@@ -43,26 +46,17 @@ class Filtra_Empleado(ListView):
             return Personal.objects.order_by('apellidos', 'nombres')
 
     
-class Nuevo_Empleado(SuccessMessageMixin, CreateView):
+class Nuevo_Empleado(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Personal
     template_name = 'personal/personal_create_form.html'
-    fields = ['foto', 'apellidos', 'nombres', 'id_documento',
-                    'documento','cuil','fecha_nacimiento','fecha_ingreso',
-                    'id_categoria', 'id_est_civil', 'domicilio',
-                    'id_localidad', 'id_provincia', 'tel', 'email'
-                    ]
+    form_class = PersonalForm
     success_message = "El empleado ha sido dado de alta con exito!"
     success_url = reverse_lazy('personal:personal-index')
 
-class Edita_Empleado(SuccessMessageMixin, UpdateView):
+class Edita_Empleado(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Personal
     template_name = 'personal/personal_form.html' 
-    fields = ['foto', 'apellidos', 'nombres', 'id_documento',
-                    'documento','cuil','fecha_nacimiento','fecha_ingreso',
-                    'id_categoria', 'id_est_civil', 'domicilio',
-                    'id_localidad', 'id_provincia', 'tel', 'email'
-                    ]
-    
+    form_class = PersonalForm
     success_message = "Los datos del empleado han sido modificados con exito!"
     success_url = reverse_lazy('personal:personal-index')
 
@@ -72,7 +66,7 @@ class Detalle_Empleado(DetailView):
     template_name = 'personal/personal_detail.html'
 
 
-class Baja_Empleado(SuccessMessageMixin, DeleteView):
+class Baja_Empleado(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Personal
     template_name = 'personal/personal_confirm_delete.html' 
     success_message = "El empleado han sido dado de baja!"

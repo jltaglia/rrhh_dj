@@ -6,7 +6,7 @@
 {% block content %}
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="card">
+        <div class="card text-bg-secondary mb-3">
             <div class="card-header">
                 Modificar Empleado
             </div>
@@ -26,12 +26,16 @@
                         <div class="row">
                             <div class="col">
                                 {{ form.apellidos|as_crispy_field }}
+                            </div>
+                            <div class="col">
                                 {{ form.nombres|as_crispy_field }}
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col">
                                 {{ form.foto|as_crispy_field }}
                             </div>
-                            <div class="col">
+                            <div class="col sm-4">
                                 <br>
                                 <img id="img_thumb_personal" class="img-thumbnail" width="100" src="{{object.foto.url}}" alt="Foto del Empleado">
                             </div>
@@ -106,8 +110,8 @@
                     </div>
                     <br>
                     <div class="form-group">
-                        <input type="submit" class="btn btn-outline-success" value="Actualizar"></input>
-                        <a class="btn btn-outline-primary" href="{% url 'personal:personal-index' %}">Cancelar</a>
+                        <input type="submit" class="btn btn-success" value="Actualizar"></input>
+                        <a class="btn btn-primary" href="{% url 'personal:personal-index' %}">Cancelar</a>
                     </div>
                 </p>
             </div>

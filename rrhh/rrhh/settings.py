@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'crispy_bootstrap5',
+    'users.apps.UsersConfig',
     'personal.apps.PersonalConfig',
 ]
     # 'licencias.apps.LicenciasConfig',
@@ -69,6 +70,10 @@ TEMPLATES = [
         },
     },
 ]
+
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = "/"
+# LOGOUT_REDIRECT_URL = "/"
 
 WSGI_APPLICATION = 'rrhh.wsgi.application'
 
@@ -126,13 +131,14 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'es-ar'
-
-TIME_ZONE = 'UTC'
-
-USE_I18N = True
-
+LANGUAGE_CODE = 'es-AR'
+TIME_ZONE = 'America/Argentina/Buenos_Aires'
+# USE_I18N = True
 USE_TZ = True
+
+DATE_FORMAT = "%Y-%m-%d"
+USE_THOUSAND_SEPARATOR = True
+# LOCALE_PATHS = (BASE_DIR + '/locale', )
 
 
 # Static files (CSS, JavaScript, Images)

@@ -16,16 +16,14 @@
     <button type="button" class="btn btn-danger btn-floating btn-lg" id="btn-back-to-top">
         <i class="fas fa-arrow-up"></i>
     </button>
-    <br>
-    <div class="card border-dark mb-3">
-        <div class="card-body text-dark text-center">
-            <h5 class="card-title">Se muestran {{object_list.count}} registros de empleados.</h5>
+    <div class="card text-bg-secondary mb-3">
+        <div class="card-header">
+                <h5 class="text-center">Se muestran {{object_list.count}} registros de empleados.</h5>
+            </div>
         </div>
-    </div>
-    <div class="card">
         <div class="card-body">
-            <table class="table table-dark table-hover table align-middle table-responsive">
-                <thead class="thead-light">
+            <table class="table table-secondary table-hover table align-middle table-responsive table-striped">
+                <thead class="table-secondary">
                     <tr>
                         <th>Leg</th>
                         <th>Foto</th>
@@ -44,10 +42,10 @@
                                 <td>{{empleado.nombres}}</td>
                                 <td>
                                     <div class="d-grid d-md-block mx-auto">
-                                        <a class="btn btn-outline-info" href="{% url 'personal:personal-detalle' empleado.id %}">Detalle</a>
-                                        <a class="btn btn-outline-primary" href="{% url 'personal:personal-editar' empleado.id %}">Editar</a>
-                                        <a class="btn btn-outline-warning" href="#">Licencias</a>
-                                        <a class="btn btn-outline-danger" href="{% url 'personal:personal-baja' empleado.id %}">Borrar</a>
+                                        <a class="btn btn-info" href="{% url 'personal:personal-detalle' empleado.id %}">Detalle</a>
+                                        <a class="btn btn-primary" href="{% url 'personal:personal-editar' empleado.id %}">Editar</a>
+                                        <a class="btn btn-danger" href="{% url 'personal:personal-baja' empleado.id %}">Borrar</a>
+                                        <a class="btn btn-warning" href="#">Licencias</a>
                                     </div>
                                 </td>
                             </tr>

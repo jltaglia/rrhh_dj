@@ -5,7 +5,7 @@
 {% block content %}
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="card">
+        <div class="card text-bg-secondary mb-3">
             <div class="card-header">
                 <h4>¿ESTA SEGURO DE ELIMINAR EL EMPLEADO?</h4>
                 <h5>Este cambio no se puede deshacer...!</h5>
@@ -18,6 +18,7 @@
                             <h5 class="card-title">{{object.apellidos}}, {{object.nombres}}</h5>
                             <input type="text" readonly id="empleado" name="empleado" value="{{object.id}}" hidden>
                         </div>
+                    </div>
                     <div class="row">
                         <div class="col-sm">
                             <img id="img_thumb_personal" class="img-thumbnail" width="100" src="{{object.foto.url}}" alt="">
@@ -26,8 +27,8 @@
                 </div>
                 <br>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-outline-danger" value="Confirmar"></input>
-                    <a class="btn btn-outline-success" href="{% url 'personal:personal-index' %}">Cancelar</a>
+                    <input type="submit" class="btn btn-danger" value="Confirmar"></input>
+                    <a class="btn btn-success" href="{% url 'personal:personal-index' %}">Cancelar</a>
                 </div>
             </div>
         </div>

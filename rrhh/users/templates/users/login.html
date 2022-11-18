@@ -1,0 +1,51 @@
+{% extends "personal/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}
+    - Login
+{% endblock title %}
+{% block content %}
+    
+    {% if next %}
+        {% if user.is_authenticated %}
+            <br>
+            <div class="text-center alert alert-warning alert-dismissible fade show" role="alert">
+                <p>Su cuenta no tiene acceso a esta página. Para continuar,
+                    por favor logueesé con una cuenta que posea acceso.</p>
+            </div>
+        {% else %}
+            <br>
+            <div class="text-center alert alert-warning alert-dismissible fade show" role="alert">
+                <strong><p class="text-danger">Por favor logeesé para ver esta página</p></strong>
+            </div>
+        {% endif %}
+    {% endif %}
+
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="card text-bg-secondary mb-3">
+                <br>
+                <div class="card-header">
+                    <legend class="mb-1">Ingrese sus datos para logearse</legend>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-4">
+                                {{ form|crispy }}
+                            </div>    
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-success" value="login">
+                        <input type="hidden" name="next" value="{{ next }}">
+                    </div>
+                </div>
+                <div class="card-footer">
+                </div>
+            </div>
+        </form>
+    </div>
+
+{% endblock content%}

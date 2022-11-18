@@ -5,7 +5,7 @@
 {% endblock title %}
 {% block content %}
     <form method="GET" action="/personal/personal_filtrado/" enctype="multipart/form-data">
-        <div class="card">
+        <div class="card text-bg-secondary mb-3">
             <div class="card-header">
                 Filtrar los Empleados por Apellidos y/o Nombres (dejar todo en blanco para mostrar todos los empleados)
             </div>
@@ -31,8 +31,8 @@
                 </div>
                 <br>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-outline-success" value="Flitrar"></input>
-                    <a class="btn btn-outline-primary" href="{% url 'personal:personal-index' %}">Volver</a>
+                    <input type="submit" class="btn btn-success" value="Flitrar"></input>
+                    <a class="btn btn-primary" href="{% url 'personal:personal-index' %}">Volver</a>
                 </div>
             </div>
         </div>

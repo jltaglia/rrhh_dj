@@ -7,15 +7,16 @@
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-group">
-            <div class="card">
+            <div class="card text-bg-secondary mb-3">
                 <div class="card-header">
-                    Alta de Nuevo Empleado
+                    Alta de Nuevo Empleado 
                 </div>
                 <div class="card-body">
                     <div class="form-group">
                         <div class="row">
                             <div class="col">
                                 <h5 class="card-title">Datos del Empleado</h5>
+                                <strong><p class="text-warning">Los datos marcados con (*) son obligatorios</p></strong>
                             </div>
                             <div class="col">
                                 <input name="txtIdEmpleado" class="form-control form-control-lg" type="text" aria-label="Disabled input example" disabled readonly value="NUEVO"></input>
@@ -27,8 +28,12 @@
                             <div class="row">
                                 <div class="col">
                                     {{ form.apellidos|as_crispy_field }}
+                                </div>
+                                <div class="col">
                                     {{ form.nombres|as_crispy_field }}
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="col">
                                     {{ form.foto|as_crispy_field }}
                                 </div>
@@ -107,8 +112,8 @@
                         </div>
                         <br>
                         <div class="form-group">
-                            <input type="submit" class="btn btn-outline-success" value="Confirma"></input>
-                            <a class="btn btn-outline-primary" href="{% url 'personal:personal-index' %}">Cancelar</a>
+                            <input type="submit" class="btn btn-success" value="Confirma"></input>
+                            <a class="btn btn-primary" href="{% url 'personal:personal-index' %}">Cancelar</a>
                         </div>
                     </p>
                 </div>
