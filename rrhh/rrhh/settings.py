@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+import socket
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -81,32 +82,34 @@ WSGI_APPLICATION = 'rrhh.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# Settings for use in PythonAnywhere
-#
-# ALLOWED_HOSTS = ['jltaglia2.pythonanywhere.com']
-# DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.mysql',
-#             'NAME': 'jltaglia2$rrhh',
-#             'USER': 'jltaglia2',
-#             'PASSWORD': 'django2022',
-#             'HOST': 'jltaglia2.mysql.pythonanywhere-services.com',
-#             'PORT': '',
-#         }
-#     }
-
-# Settings for my PC
-#
-DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'rrhh',
-            'USER': 'postgres',
-            'PASSWORD': 'postgres',
-            'HOST': '127.0.0.1',
-            'PORT': '5432',
+maquina = socket.gethostname()
+if maquina == 'JLTAGLIA-CASA':
+    # Settings for my PC
+    #
+    DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql',
+                'NAME': 'rrhh',
+                'USER': 'postgres',
+                'PASSWORD': 'postgres',
+                'HOST': '127.0.0.1',
+                'PORT': '5432',
+            }
         }
-    }
+else:
+    # Settings for use in PythonAnywhere
+    # 
+    ALLOWED_HOSTS = ['jltaglia2.pythonanywhere.com']
+    DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.mysql',
+                'NAME': 'jltaglia2$rrhh',
+                'USER': 'jltaglia2',
+                'PASSWORD': 'django2022',
+                'HOST': 'jltaglia2.mysql.pythonanywhere-services.com',
+                'PORT': '',
+            }
+        }
 
 
 # Password validation
