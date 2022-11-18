@@ -4,7 +4,7 @@
 //
 
 
-
+/*
 document.getElementById("mi_footer").innerHTML = `
     <div class="social">
         <span><a href="https://www.facebook.com/profile.php?id=100075834332674" target="_blank"
@@ -19,7 +19,7 @@ document.getElementById("mi_footer").innerHTML = `
                     class="fa-solid fa-square-envelope"></i></a></span>
     </div>
 `;
-
+*/
 
 // ------------------------------ PARA CARGAR EL MENU SEGUN LA PAG ACTIVA ------------------------------
 var pagina = document.title
@@ -57,7 +57,10 @@ var header_completo = `
         </a>
     </div>
     `;
+
+/*
 document.getElementById("mi_header").innerHTML = header_completo;
+*/
 
 // ----------------------- PARA HACER RESPONSIVE EL MENU -----------------------
 function funMenu() {
