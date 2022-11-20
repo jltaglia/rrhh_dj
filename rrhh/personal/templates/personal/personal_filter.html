@@ -4,6 +4,7 @@
     - Filtrar
 {% endblock title %}
 {% block content %}
+<div class="container">
     <form method="GET" action="/personal/personal_filtrado/" enctype="multipart/form-data">
         <div class="card text-bg-secondary mb-3">
             <div class="card-header">
@@ -21,20 +22,21 @@
                     <div class="row">
                         <div class="col">
                             <label for="apellidos">Apellidos</label>
-                            <input id="apellidos" type="text" class="form-control" placeholder="Apellidos completos" aria-label="First name" name="apellidos" value=""></input>
+                            <input id="apellidos" type="text" class="form-control" placeholder="Apellidos completos" aria-label="First name" name="apellidos" value="">
                         </div>
                         <div class="col">
                             <label for="nombres">Nombres</label>
-                            <input id="nombres" type="text" class="form-control" placeholder="Nombres completos" aria-label="Last name" name="nombres" value=""></input>
+                            <input id="nombres" type="text" class="form-control" placeholder="Nombres completos" aria-label="Last name" name="nombres" value="">
                         </div>
                     </div>
                 </div>
                 <br>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-success" value="Flitrar"></input>
+                    <input type="submit" class="btn btn-success" value="Flitrar">
                     <a class="btn btn-primary" href="{% url 'personal:personal-index' %}">Volver</a>
                 </div>
             </div>
         </div>
     </form>
-    {% endblock content %}
+</div>
+{% endblock content %}

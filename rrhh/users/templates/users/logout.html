@@ -4,20 +4,18 @@
     - Logout
 {% endblock title %}
 {% block content %}
-
+    <div class="text-center alert alert-info alert-dismissible fade show" role="alert">
+        <strong><p class="text-info">ATENCIÓN: Ha cerrado su sesión...</p></strong>
+    </div>
     <div class="card text-bg-secondary mb-3">
-        <br>
-        <div class="card-header">
-            <legend class="mb-4">ATENCIÓN: Se ha deslogeado...</legend>
-        </div>
         <div class="card-body">
             <div class="form-group">
                 <div class="row">
-                    <div class="col">
-                        <legend class="border-bottom mb-6">Si lo desea logeese nuevamente...</legend>
-                        <a class="btn btn-success" href="{% url 'login' %}">Log in</a>
-                        <input type="hidden" name="next" value="{{ next }}">
-                    </div>  
+                    <p class="mb-6">Si lo desea pude 
+                        <a class="btn btn-success" href="{% url 'login' %}">Ingresar</a>
+                        nuevamente...  O bien puede 
+                        <a class="btn btn-info" href="/">Volver</a>
+                    </p>
                 </div> 
             </div> 
         </div> 

@@ -12,38 +12,54 @@
     <title>Recursos Humanos{% block title %}{% endblock title %}</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary fixed-top">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'personal:personal-index' %}">RRHH</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <div class="navbar-nav">
-                    <a class="nav-link nav-link" href="{% url 'personal:personal-index' %}">Padrón</a>
-                    <a class="nav-link nav-link" href="{% url 'personal:personal-filtro' %}">Filtrar</a>
-                    <a class="nav-link nav-link" href="{% url 'personal:personal-alta' %}" tabindex="-1">Alta</a>
+    <style>
+        #btn-back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            z-index: 50000;
+        }
+    </style>
+    <header class="site-header">
+        <button type="button" class="btn btn-danger btn-floating btn-lg" id="btn-back-to-top">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-secondary fixed-top">
+            <div class="container">
+                {% if user.is_authenticated %}
+                    <a class="navbar-brand" href="{% url 'personal:personal-index' %}">RRHH ({{user.username}})</a>
+                {% else %}
+                    <a class="navbar-brand" href="{% url 'personal:personal-index' %}">RRHH</a>
+                {% endif %}
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPricipal"
+                        aria-controls="navbarPricipal" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarPricipal">
+                    <div class="navbar-nav mr-auto">
+                        <a class="nav-link nav-link" href="{% url 'personal:personal-index' %}">Padrón</a>
+                        <a class="nav-link nav-link" href="{% url 'personal:personal-filtro' %}">Filtrar</a>
+                        <a class="nav-link nav-link" href="{% url 'personal:personal-alta' %}" tabindex="-1">Alta</a>
+                    </div>
+                </div>
+                <!-- Lado derecho de la barra de navegación -->
+                <div class="collapse navbar-collapse" id="navbarPricipal">
+                    <div class="navbar-nav">
+                        {% if user.is_authenticated %}
+                            <a class="nav-item nav-link" href="{% url 'logout' %}">Salir</a>
+                            <a class="nav-item nav-link" href="{% url 'change-password' %}">Cambiar clave</a>
+                        {% else %}
+                            <a class="nav-item nav-link" href="{% url 'login' %}">Ingresar</a>
+                        {% endif %}
+                        {% if user.is_staff %}
+                            <a class="nav-link" href="/admin/">Admin</a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
-            <!-- Lado derecho de la barra de navegación -->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <div class="navbar-nav">
-                    {% if user.is_authenticated %}
-                        <a class="nav-item nav-link" href="{% url 'logout' %}">{{user.username}} - Logout</a>
-                        <a class="nav-item nav-link" href="{% url 'change-password' %}">Cambiar Clave</a>
-                    {% else %}
-                        <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
-                    {% endif %}
-                </div>
-            </div>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <div class="navbar-nav">
-                    <a class="nav-link" href="/admin/">| Admin |</a>
-                </div>
-            </div>
-        </div>
-    </nav>
+        </nav>
+    </header>
     <br>
     <br>
     <div class="container">
@@ -56,13 +72,24 @@
                 </div>
             {% endfor %}
         {% endif %}
-        <br>
-        {% block content %}{% endblock content %}
-        <br>
     </div>
+    <br>
+    <div class="container">
+        {% block content %}{% endblock content %}
+    </div>
+    <br>
     <div class="card">
-        <div class="card-footer text-bg-secondary">
-            <p class="card-text">(C) Grupo 7 - CaC 2022</a></p>
+        <div class="card-footer text-bg-secondary text-center">
+            <p>(C) Grupo 7 - CaC 2022
+                <a class="btn btn-primary rounded-circle border-dark"
+                style="background-color: #333333;"
+                href="https://github.com/jltaglia/rrhh_dj"
+                role="button">
+                <i class="fab fa-github fa-2x fa-beat-fade" 
+                style="--fa-animation-duration:3s; " 
+                data-darkreader-inline-color=""></i>
+                </a>
+            </p>
         </div>
     </div>
 </body>
@@ -72,25 +99,25 @@
 
     // When the user scrolls down 20px from the top of the document, show the button
     window.onscroll = function () {
-    scrollFunction();
-    };
+                            scrollFunction();
+                        };
 
     function scrollFunction() {
-    if (
-    document.body.scrollTop > 20 ||
-    document.documentElement.scrollTop > 20
-    ) {
-    mybutton.style.display = "block";
-    } else {
-    mybutton.style.display = "none";
-    }
+        if (
+            document.body.scrollTop > 20 ||
+            document.documentElement.scrollTop > 20
+            ) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
     }
     // When the user clicks on the button, scroll to the top of the document
     mybutton.addEventListener("click", backToTop);
 
     function backToTop() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-    }
+                    document.body.scrollTop = 0;
+                    document.documentElement.scrollTop = 0;
+            }
 </script>
 </html>

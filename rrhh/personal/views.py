@@ -37,13 +37,21 @@ class Filtra_Empleado(ListView):
         nombres = self.request.GET.get("nombres", None)
      
         if nombres != '' and apellidos != '':
-            return Personal.objects.filter(apellidos__contains=apellidos.upper(), nombres__contains=nombres.upper()).order_by('apellidos', 'nombres') 
+            return (Personal.objects.
+                        filter(apellidos__contains=apellidos.upper(), 
+                               nombres__contains=nombres.upper()).
+                        order_by('apellidos', 'nombres')) 
         elif apellidos != '':
-            return Personal.objects.filter(apellidos__contains=apellidos.upper()).order_by('apellidos', 'nombres')
+            return (Personal.objects.
+                        filter(apellidos__contains=apellidos.upper()).
+                        order_by('apellidos', 'nombres'))
         elif nombres != '':
-            return Personal.objects.filter(nombres__contains=nombres.upper()).order_by('apellidos', 'nombres')
+            return (Personal.objects.
+                        filter(nombres__contains=nombres.upper()).
+                        order_by('apellidos', 'nombres'))
         else:
-            return Personal.objects.order_by('apellidos', 'nombres')
+            return (Personal.objects.
+                        order_by('apellidos', 'nombres'))
 
     
 class Nuevo_Empleado(LoginRequiredMixin, SuccessMessageMixin, CreateView):
