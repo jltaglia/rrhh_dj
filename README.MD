@@ -11,7 +11,4 @@ http://jltaglia2.pythonanywhere.com/
 ### Grupo 7
 ### Integrantes:
 - Bellizzi, Pablo
-- Higa, Nicolás Ariel
-- Mendivil, Gustavo
-- Pace, Bruno Ezequiel
 - Tagliarini, Julián
