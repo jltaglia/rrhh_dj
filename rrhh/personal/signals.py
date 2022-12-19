@@ -24,6 +24,7 @@ def auto_delete_foto_on_change(sender, instance, **kwargs):
     (se cambia la foto del empleado).
     """
     # SI ES UN NUEVO OBJETO (ALTA) NO BORRA LA IMAGEN ANTERIOR
+    # PORQUE BORRARÍA LA IMAGEN POR DEFECTO QUE PROVEE EL SISTEMA
     if not instance.pk:
         return False
     
