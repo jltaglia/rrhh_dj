@@ -34,7 +34,7 @@
                                         <a class="btn btn-info" href="{% url 'personal:personal-detalle' empleado.id %}">Detalle</a>
                                         <a class="btn btn-primary" href="{% url 'personal:personal-editar' empleado.id %}">Editar</a>
                                         <a class="btn btn-danger" href="{% url 'personal:personal-baja' empleado.id %}">Borrar</a>
-                                        <a class="btn btn-warning" href="#">Licencias</a>
+                                        <a class="btn btn-warning" href="{% url 'licencias:licencias-listado' empleado.id %}">Licencias</a>
                                     </div>
                                 </td>
                             </tr>

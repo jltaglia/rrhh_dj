@@ -39,6 +39,7 @@ urlpatterns = [
     # Personal paths
     path('', include('personal.urls'), name='home'),
     path('personal/', include('personal.urls')),
+    path('licencias/', include('licencias.urls')),
 ]  
 
 # if settings.DEBUG:

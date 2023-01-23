@@ -40,9 +40,8 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'users.apps.UsersConfig',
     'personal.apps.PersonalConfig',
-]
-    # 'licencias.apps.LicenciasConfig',
-# ]
+    'licencias.apps.LicenciasConfig',
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
