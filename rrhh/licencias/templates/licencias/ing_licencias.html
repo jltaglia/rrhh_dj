@@ -1,0 +1,200 @@
+{% extends 'personal/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+    - Ingreso Licencia
+{% endblock title %}
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        <div class="card">
+            <div class="card-header">
+                Ingresar la fecha de inicio y finalizacion del Evento
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title">{{personal.apellidos}}, {{personal.nombres}}</h5>
+                        </div>
+                        <div class="col">
+                            <h5>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">Legajo Nº</span>
+                                    <input id="txtIdEmpleado" name="txtIdEmpleado" type="text" class="form-control"
+                                        aria-label="Username" aria-describedby="basic-addon1" value="{{personal.id}}"
+                                        readonly>
+                                </div>
+                            </h5>
+                        </div>
+                        <div class="col">
+                            <h5>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">Fecha de Ingreso</span>
+                                    <input id="txtFechaIngreso" name="txtFechaIngreso" class="form-control"
+                                        aria-label="Username" aria-describedby="basic-addon1" value="{{personal.fecha_ingreso}}"
+                                        readonly>
+                                </div>
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <h5>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">Licencia en curso</span>
+                                    <input id="txtLicenciaEnCurso" name="txtLicenciaEnCurso" type="text" class="form-control"
+                                        aria-label="Username" aria-describedby="basic-addon1" value="{{personal.licencia_curso}}"
+                                        readonly>
+                                </div>
+                            </h5>
+                        </div>
+                        <div class="col">
+                            <h5>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">Saldo de licencia [días]</span>
+                                    <input id="txtSaldoLicEnCurso" name="txtSaldoLicEnCurso" type="text"
+                                        class="form-control" aria-label="Username" aria-describedby="basic-addon1"
+                                        value="{{personal.saldo_licencia}}" readonly>
+                                </div>
+                            </h5>
+                        </div>
+                        <div class="col">
+                            <h5>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">Finalización última licencia</span>
+                                    <input id="txtFechaRegreso" name="txtFechaRegreso" class="form-control"
+                                        aria-label="Username" aria-describedby="basic-addon1" value="{{personal.fecha_regreso}}"
+                                        readonly>
+                                </div>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col">
+                            {{ form.id_evento|as_crispy_field }}
+                        </div>
+                        <div class="col">
+                            {{ form.fecha_desde|as_crispy_field }}
+                        </div>
+                        <div class="col">
+                            {{ form.fecha_hasta|as_crispy_field }}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-check form-check">
+                                <input class="form-check-input" type="checkbox" value="False" id="chbxAfectaVaca" name="chbxAfectaVaca" checked>
+                                <label class="form-check-label" for="chbxAfectaVaca">
+                                    Este Evento afecta a la licencia por vacaciones en curso.
+                                </label>
+                            </div>
+                            <br>
+                            <div class="form-check form-check">
+                                <input class="form-check-input" type="checkbox" value="False" id="chbxImprimePlanilla" name="chbxImprimePlanilla" checked>
+                                <label class="form-check-label" for="chbxImprimePlanilla">
+                                    Imprime la planilla del evento.
+                                </label>
+                                <label for="">(Si no la imprime, luego la planilla no podrá ser re-impresa...)</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <label for="txtDiasLicencia">Cantidad de días del evento</label>
+                            <input id="txtDiasLicencia" name="txtDiasLicencia" class="form-control"
+                                aria-label="Last name" aria-describedby="basic-addon1" value="0"
+                                readonly>
+                            <label for="dateFechaRegreso">Fecha estimada de regreso</label>
+                            <input id="dateFechaRegreso" type="date" class="form-control" aria-label="Last name"
+                                name="dateFechaRegreso" value="{{personal.fecha_regreso}}" readonly></input>
+                        </div>
+                        <label id="msgFechaRegreso" style="text-align: right ;"></label>
+                    </div>
+                </div>
+                <br>
+
+                <label for="id_empleado" hidden></label>
+                <input type="number" name="id_empleado" id="id_id_empleado" value="{{personal.id}}" readonly hidden>
+                <input type="number" name="cantidad" id="id_cantidad" readonly hidden>
+                <input type="number" name="borrable" id="id_borrable" readonly hidden>
+                <input type="number" name="afecta_vac" id="id_afecta_vac" readonly hidden>
+
+
+
+                <!-- PARA HACER CALCULO Y PREVIEW DE LA FECHA DE REGRESO Y CANTIDAD DE DIAS DE LICENCIA -->
+                <script>
+                    function calcula_dias_y_regreso() {
+                        document.getElementById("msgFechaRegreso").innerHTML = "";
+                        var fechaInicio = new Date(document.getElementById("id_fecha_desde").value);
+                        var fechaFin = new Date(document.getElementById("id_fecha_hasta").value);
+                        var idEmpleado = document.getElementById("txtIdEmpleado").value;
+                        var afectaOno = document.getElementById("chbxAfectaVaca");
+
+                        console.log(idEmpleado)
+                        console.log(afectaOno.checked)
+                        
+                        var dias = fechaFin.getTime() - fechaInicio.getTime();
+                        var dias = Math.round(dias / (1000 * 60 * 60 * 24)) + 1;
+                        var fechaRegreso = new Date(fechaFin);
+                        fechaRegreso.setDate(fechaRegreso.getDate() + 1);
+                        var diaDeSem = fechaRegreso.getDay() + 1
+                        if (diaDeSem > 6) {diaDeSem = 0;}
+                        var diaDelMes = fechaRegreso.getDate()
+                        var mes = fechaRegreso.getMonth()
+                        var diaYmes = diaDelMes.toString() + "-" + mes.toString();
+                        // CHEQUEAR SI EL DIA DE RETORNO ESTÁ DENTRO DE ALGUN FERIADO O DOMINGO
+                        const DIA_DEL_TRABAJO = '1-5';
+                        const NAVIDAD = '12-25';
+                        const ANIO_NUEVO = '1-1';
+                        if (diaDeSem == 0 || diaYmes == DIA_DEL_TRABAJO || diaYmes == NAVIDAD || diaYmes == ANIO_NUEVO) {
+                            fechaRegreso.setDate(diaDelMes + 1);
+                            dias += 1;
+                            document.getElementById("msgFechaRegreso").innerHTML = "(*) se suma un día por ser domingo y/o feriado";
+                        }
+                        //
+
+                        // PREVIEW DE LOS DATOS EN EL FORMULARIO
+                        document.getElementById("txtDiasLicencia").value = dias;
+                        document.getElementById("dateFechaRegreso").value = fechaRegreso.toISOString().substring(0, 10);
+                        //
+                        // RELLENADO DE LOS CAMPOS OBLIGATORIOS DEL FORMULARIO
+                        document.getElementById("id_id_empleado").value = idEmpleado;
+                        document.getElementById("id_cantidad").value = dias;
+                        document.getElementById("id_borrable").value = 0;
+                        if (afectaOno.checked == true) {
+                            document.getElementById("id_afecta_vac").value = 1;
+                        } else {
+                            document.getElementById("id_afecta_vac").value = 0;
+                        }
+                        //
+
+                    }
+                </script>
+                <div class="row">
+                    <div class="form-group">
+                        <button type="button" class="btn btn-success" onclick="calcula_dias_y_regreso()">Calcula Evento</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col">
+                            <button type="submit" class="btn btn-success">Confirma Evento</button>
+                            <a class="btn btn-primary" href="{% url 'licencias:licencias-listado' personal.id %}">Volver</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+        </div>
+    </form>
+{% endblock content %}

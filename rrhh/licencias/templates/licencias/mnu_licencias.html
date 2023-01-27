@@ -1,0 +1,172 @@
+{% extends 'personal/base.html' %}
+{% block title %}
+    - Detalle Licencias
+{% endblock title %}
+{% block content %}
+    {% csrf_token %}
+    <div class="sticky-top">
+        <div class="card">
+            <div class="card-header">
+                Detalles de Licencias del Empleado
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title">{{personal.apellidos}}, {{personal.nombres}}</h5>
+                        </div>
+                        <div class="col">
+                            <h5>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">Legajo Nº</span>
+                                    <input id="txtIdEmpleado" name="txtIdEmpleado" type="text" class="form-control"
+                                        aria-label="Username" aria-describedby="basic-addon1" value="{{personal.id}}"
+                                        readonly>
+                                </div>
+                            </h5>
+                        </div>
+                        <div class="col">
+                            <h5>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">Fecha de Ingreso</span>
+                                    <input id="txtFechaIngreso" name="txtFechaIngreso" class="form-control"
+                                        aria-label="Username" aria-describedby="basic-addon1" value="{{personal.fecha_ingreso}}"
+                                        readonly>
+                                </div>
+                            </h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <h5>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">Licencia en curso</span>
+                                    <input id="txtLicenciaEnCurso" name="txtLicenciaEnCurso" class="form-control"
+                                        aria-label="Username" aria-describedby="basic-addon1" value="{{personal.licencia_curso}}"
+                                        readonly>
+                                </div>
+                            </h5>
+                        </div>
+                        <div class="col">
+                            <h5>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">Saldo de licencia [días]</span>
+                                    <input id="txtSaldoLicEnCurso" name="txtSaldoLicEnCurso" type="text"
+                                        class="form-control" aria-label="Username" aria-describedby="basic-addon1"
+                                        value="{{personal.saldo_licencia}}" readonly>
+                                </div>
+                            </h5>
+                        </div>
+                        <div class="col">
+                            <h5>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">Regreso de última licencia</span>
+                                    <input id="txtFechaRegreso" name="txtFechaRegreso" class="form-control"
+                                        aria-label="Username" aria-describedby="basic-addon1" value="{{personal.fecha_regreso}}"
+                                        readonly>
+                                </div>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="form-group">
+                        {% comment %} <a class="btn btn-outline-success" href="/ing_licencias/{{empleado[0]}}">Nueva Licencia</a>
+                        <a class="btn btn-outline-info" href="/reimp_licencia/{{empleado[0]}}">Reimprimir Ultima Licencia</a>
+                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" href="#ConfirmBorraLic">Borrar Ultima Licencia</button> {% endcomment %}
+
+                        <a class="btn btn-success" href="{% url 'licencias:licencias-nuevas' personal.id%}">Nuevo Evento</a>
+                        <a class="btn btn-info" href="#">Reimprime Ultimo Evento</a>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" href="#">Anula Ultimo Evento</button>
+                        <a class="btn btn-primary" href="{% url 'personal:personal-index' %}">Volver</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <table class="table table-secondary table-striped table-hover align-middle">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Comenzó</th>
+                            <th>Finalizó</th>
+                            <th>Tipo de Evento</th>
+                            <th>Días Tomados</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for licencia in licencias %}
+                            <tr>
+                                {% comment %} <td>{{licencia.fecha_desde.strftime("%d/%m/%Y")}}</td>
+                                <td>{{legajo[2].strftime("%d/%m/%Y")}}</td> {% endcomment %}
+                                
+                                <td>{{licencia.fecha_desde}}</td>
+                                <td>{{licencia.fecha_hasta}}</td>
+                                <td>{{licencia.id_evento}}</td>
+                                <td>{{licencia.cantidad}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+    <!-- Modal -->
+    <div class="modal fade" id="ConfirmBorraLic" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="staticBackdropLabel">¿ Confirma Anulación del Evento ?</h6>
+                <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+            </div>
+            <div class="modal-body">
+                <label class="form-check-label" for="chbxImprimePlanilla">
+                    Una vez anulado el evento no podrá ser reimpreso...
+                </label>
+            </div>
+            <div class="modal-footer">
+                {% comment %} <a class="btn btn-outline-danger" href="/borrar_lic/{{empleado[0]}}">Confirma</a> {% endcomment %}
+
+                <a class="btn btn-danger" href="#">Confirma</a>
+
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Vuelve</button>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- -->
+    <script>
+        //Get the button
+        let mybutton = document.getElementById("btn-back-to-top");
+
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function () {
+        scrollFunction();
+        };
+
+        function scrollFunction() {
+        if (
+        document.body.scrollTop > 20 ||
+        document.documentElement.scrollTop > 20
+        ) {
+        mybutton.style.display = "block";
+        } else {
+        mybutton.style.display = "none";
+        }
+        }
+        // When the user clicks on the button, scroll to the top of the document
+        mybutton.addEventListener("click", backToTop);
+
+        function backToTop() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+        }
+    </script>
+<!-- </form> -->
