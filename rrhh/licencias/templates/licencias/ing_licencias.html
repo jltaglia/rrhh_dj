@@ -92,13 +92,18 @@
                                 </label>
                             </div>
                             <br>
-                            <div class="form-check form-check">
+                            {% comment %} <div class="form-check form-check">
                                 <input class="form-check-input" type="checkbox" value="False" id="chbxImprimePlanilla" name="chbxImprimePlanilla" checked>
                                 <label class="form-check-label" for="chbxImprimePlanilla">
                                     Imprime la planilla del evento.
                                 </label>
                                 <label for="">(Si no la imprime, luego la planilla no podrá ser re-impresa...)</label>
+                            </div> {% endcomment %}
+
+                            <div class="form-group">
+                                <button type="button" class="btn btn-success" onclick="calcula_dias_y_regreso()">Calcula Evento</button>
                             </div>
+
                         </div>
                         <div class="col">
                             <label for="txtDiasLicencia">Cantidad de días del evento</label>
@@ -117,8 +122,8 @@
                 <label for="id_empleado" hidden></label>
                 <input type="number" name="id_empleado" id="id_id_empleado" value="{{personal.id}}" readonly hidden>
                 <input type="number" name="cantidad" id="id_cantidad" readonly hidden>
-                <input type="number" name="borrable" id="id_borrable" readonly hidden>
-                <input type="number" name="afecta_vac" id="id_afecta_vac" readonly hidden>
+                <input name="borrable" id="id_borrable" readonly hidden>
+                <input name="afecta_vac" id="id_afecta_vac" readonly hidden>
 
 
 
@@ -130,10 +135,6 @@
                         var fechaFin = new Date(document.getElementById("id_fecha_hasta").value);
                         var idEmpleado = document.getElementById("txtIdEmpleado").value;
                         var afectaOno = document.getElementById("chbxAfectaVaca");
-
-                        console.log(idEmpleado)
-                        console.log(afectaOno.checked)
-                        
                         var dias = fechaFin.getTime() - fechaInicio.getTime();
                         var dias = Math.round(dias / (1000 * 60 * 60 * 24)) + 1;
                         var fechaRegreso = new Date(fechaFin);
@@ -161,21 +162,16 @@
                         // RELLENADO DE LOS CAMPOS OBLIGATORIOS DEL FORMULARIO
                         document.getElementById("id_id_empleado").value = idEmpleado;
                         document.getElementById("id_cantidad").value = dias;
-                        document.getElementById("id_borrable").value = 0;
+                        document.getElementById("id_borrable").value = false;
                         if (afectaOno.checked == true) {
-                            document.getElementById("id_afecta_vac").value = 1;
+                            document.getElementById("id_afecta_vac").value = true;
                         } else {
-                            document.getElementById("id_afecta_vac").value = 0;
+                            document.getElementById("id_afecta_vac").value = false;
                         }
                         //
 
                     }
                 </script>
-                <div class="row">
-                    <div class="form-group">
-                        <button type="button" class="btn btn-success" onclick="calcula_dias_y_regreso()">Calcula Evento</button>
-                    </div>
-                </div>
             </div>
             <div class="card-footer">
                 <div class="row">

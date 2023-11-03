@@ -1,5 +1,8 @@
+from django.core.exceptions import ValidationError
 from django.db import models
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
+
 import licencias.validators as va
 
 
@@ -29,8 +32,16 @@ class Legajos (models.Model):
     # 
 
     cantidad    = models.SmallIntegerField()
-    borrable    = models.SmallIntegerField()
-    afecta_vac  = models.SmallIntegerField()
+    borrable    = models.BooleanField()
+    afecta_vac  = models.BooleanField()
+
+    def clean(self):
+        # CHEQUEAR QUE LA FECHA DE FINALIZACION SEA MAYOR O IGUAL QUE LA FECHA DE COMIENZO DEL EVENTO
+        if self.fecha_desde >= self.fecha_hasta:
+            raise ValidationError(_('Fecha incorrecta, la fecha de finalización debe ser mayor o igual a la de comienzo!'), code='invalid')
+
 
     def get_absolute_url(self):
             return reverse_lazy("licencias:licencias-listado", kwargs={"pk": self.id_empleado_id})
+      
+    

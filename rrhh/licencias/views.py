@@ -22,7 +22,7 @@ class Lista_Licencias(LoginRequiredMixin, SuccessMessageMixin, DetailView):
         persona = self.kwargs['pk']
         context = super().get_context_data(**kwargs)
         context['personal'] = Personal.objects.get(pk=persona)
-        context['licencias'] = Legajos.objects.filter(id_empleado=persona).order_by('-fecha_desde')
+        context['licencias'] = Legajos.objects.filter(id_empleado=persona).order_by('-id')
 
         return context
 
@@ -37,10 +37,12 @@ class Nueva_Licencia(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     success_message = "El evento ha sido ingresado con exito!"
     
     # HAY QUE BUSCAR LA VUELTA PARA DEJAR DE HARCODEAR EL VALOR DE 'pk'
-    # SI ESTO LOGRAMOS QUE FUNCIONE, HABRIA QUE SACAR EL def get_absolute_url(self):
-    # DEL MODELO Legajos
+    # 
     # success_url = reverse_lazy('licencias:licencias-listado', kwargs={'pk': 27})
-          
+    # 
+    # SI LOGRAMOS QUE ESTO ^^^^ FUNCIONE, HABRIA QUE SACAR EL 
+    # def get_absolute_url(self): DEL MODELO Legajos
+              
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         persona = context['view'].kwargs['pk']

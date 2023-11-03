@@ -16,9 +16,4 @@ def validate_fecha_hasta(value):
     """
     if value < date.today() :
         raise ValidationError(_('Fecha incorrecta, la fecha no puede ser anterior al día de la fecha!'), code='invalid')
-        
-    # CHEQUEAR QUE LA FECHA DE FINALIZACION SEA MAYOR O IGUAL QUE LA FECHA DE COMIENZO DEL EVENTO
-    # if value > date.today() :
-    #     raise ValidationError(_('Fecha incorrecta, la fecha de finalización debe ser mayor o igual a la de comienzo!'), code='invalid')
-    
     

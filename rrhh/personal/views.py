@@ -8,7 +8,6 @@ from django.views.generic import (ListView,
                                   DeleteView)
 from .models import Personal
 from django.contrib.auth.mixins import LoginRequiredMixin
-
 from .forms import PersonalForm
 
 # Create your views here.
@@ -60,6 +59,7 @@ class Nuevo_Empleado(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = PersonalForm
     success_message = "El empleado ha sido dado de alta con exito!"
     success_url = reverse_lazy('personal:personal-index')
+
 
 class Edita_Empleado(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Personal
